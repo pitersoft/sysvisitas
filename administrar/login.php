@@ -7,7 +7,7 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-    <link rel="shortcut icon" href="images/icons/favicon.ico" />
+    <link rel="shortcut icon" href="../img/favicon.ico" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <!--===============================================================================================-->  
@@ -62,7 +62,7 @@
         </div>
       </form>
        <div class="text-center">
-          <a href="login.php" class="txt2 hov1">
+          <a href="../login.php" class="txt2 hov1">
             Volver a Login
           </a>
         </div>

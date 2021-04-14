@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en">
   <head>
@@ -33,42 +32,85 @@
     <link rel="stylesheet" type="text/css" href="css/util.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
   <!--===============================================================================================-->
-    <title>Datos Incorrectos</title>
+    <title>Cambiar Password</title>
   </head>
   <body>
-    <div class="container-login100" style="background-image: url('images/bg-01.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center;">
+    <div class="container-login100" style="background-image: url('img/fondo.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center;">
     <div class="wrap-login100 p-l-55 p-r-55 p-t-80 p-b-30">
-      <form class="login100-form validate-form">
-      	<div class="flex-c p-b-5">
-          <img src="images/icons/favicon.ico" alt="">
+      <form id="registrar" action="" method="POST" class="login100-form validate-form">
+        <div class="flex-c p-b-5">
+          <img src="img/favicon.ico" alt="">
         </div>
-      	<br>
-        <div class="alert alert-danger" align="center">
-        	<?php  
-			require 'administrar/conf/conexion.php';
-			session_start();
+        <span class="login100-form-title p-b-37">
+          Cambiar Password
+        </span>
+         <div>
+            <?php
+            // if (isset($_POST['nuevacontraseña'])){
+            //   $nc = ($_POST['nuevacontraseña']);
+            //   $nc1 = ($_POST['nuevacontraseña1']);
+            //   if ($nc===$nc1) {
+            //     echo "<div class='alert alert-success'>Las contraseñas coinciden.</div>";
+            //   }else{
+            //     echo "<div class='alert alert-danger'>Las contraseñas no coinciden.</div>";
+            //   }
+            // }
+            ?>
+          </div> 
+        <?php
+          $contra="";
+          $contrarepetida="";
+          if(isset($_POST['nuevacontraseña'])){
+            $contra=$_POST['nuevacontraseña'];
+            $contrarepetida=$_POST['nuevacontraseña1'];
 
-			$usuariol = $_POST['usuario'];
-			$clavel = $_POST['contrasena'];
+            $campos=array();
 
-			$q = "SELECT COUNT(*) FROM usuario where email = '$usuariol' and password = '$clavel' and estado = 1";
-			$consulta = mysqli_query($conexion,$q);
-			$array = mysqli_fetch_array($consulta);
+            if ($contra===$contrarepetida) {
+              array_push($campos,"Las contraseñas coinciden.");
+            }
+            if (count($campos)>0) {
+              echo '<div class="container alert" style="width: auto;"><center>';
+              for($i=0; $i<count($campos); $i++) { 
+                echo "<li style='list-style: none;' class='alert alert-success'>".$campos[$i]."</li></center></div>";
+              }
+              include 'administrar/conf/conexion.php';
+              $id=$_GET['id'];
+              $sql="UPDATE usuario SET password='$contrarepetida'WHERE idusuario='".$id."'";
+              $resultado=mysqli_query($conexion,$sql);
+              if ($resultado){
+                echo "<center><div class='alert alert-success'>Se cambio tu contraseña</div></center>";
 
-			if($array['contar'>0]){
-				$_SESSION['username'] = $usuariol;
-				header("location: index.php");
-			}else{
-				echo "DATOS INCORRECTOS";
-			}
+                echo "<script> setTimeout(\"location.href='login.php'\",3000)</script>";
+              }else{
+                echo "<div class='alert alert-danger'>No se cambio tu contraseña</div>";
+              }
+            }else{
+              echo '<div class="alert alert-danger" style="width: auto;">Las contraseñas no coinciden.</div>';
+            }
+          }
+        ?>
+       
+          <label for="">Nueva Contraseña</label>
+        <div class="wrap-input100 validate-input m-b-20" data-validate="Ingrese su nueva contraseña">
+          <input class="input100" type="password" name="nuevacontraseña" value="<?php echo $contra; ?>">
+          <span class="focus-input100"></span>
+        </div>
+          <label for="">Repita su Nueva Contraseña</label>
+        <div class="wrap-input100 validate-input m-b-20" data-validate="Repita su nueva contraseña">
+          <input class="input100" type="password" name="nuevacontraseña1" value="<?php echo $contrarepetida; ?>">
+          <span class="focus-input100"></span>
+        </div>
 
-			?>
-			</div>
+        <div class="container-login100-form-btn">
+          <button class="login100-form-btn">
+            Validar
+          </button>
+        </div>
       </form>
-      <br>
        <div class="text-center">
           <a href="login.php" class="txt2 hov1">
-            Volver
+            Volver al login
           </a>
         </div>
       

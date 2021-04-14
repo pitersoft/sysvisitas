@@ -46,7 +46,7 @@
         </span>
 
         <div class="wrap-input100 validate-input m-b-20" data-validate="Ingrese correo electrónico">
-          <input class="input100" type="text" name="usuario" placeholder="Nombre de usuario">
+          <input class="input100" type="text" name="usuario" placeholder="Correo Electrónico">
           <span class="focus-input100"></span>
         </div>
 

@@ -1,9 +1,6 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <!-- Required meta tags --><!doctype html>
-<html lang="en">
-  <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -43,18 +40,18 @@
        <?php
       include 'conexion.php';
       $id=$_GET['id'];
-      $sql="SELECT * FROM visitas INNER JOIN personas ON visitas.idpersona = personas.idpersona WHERE codigo_visita='".$id."'";
+      $sql="SELECT * FROM usuario INNER JOIN niveles ON usuario.idnivel = niveles.idnivel WHERE idusuario='".$id."'";
       $resultado=mysqli_query($con,$sql);
         while ($fila=mysqli_fetch_assoc($resultado)) {
       ?>
       <form action="" method="POST">
-        <p class="h4">Eliminar a usuario N° <?php echo $fila['codigo_visita']; ?> de nombre <?php echo $fila['nombres'];echo " ";echo $fila['apellido_pat'];echo " ";echo $fila['apellido_mat']; ?>.</p>
+        <p class="h4">Eliminar a usuario N° <?php echo $fila['idusuario']; ?> de nombre <?php echo $fila['nombre']." ".$fila['apellidos']; ?>.</p>
         <a href="index.php" class="btn btn-secondary">Cancelar</a>
         <input type="submit" class="btn btn-danger" name="eliminar" value="Eliminar">
         <?php
           $idmu=$_GET['id'];
             if (isset($_POST['eliminar'])) {
-              $eliminar="DELETE FROM visitas WHERE codigo_visita='$idmu'";
+              $eliminar="DELETE FROM usuario WHERE idusuario='$id'";
               $resultadoeliminar=mysqli_query($con,$eliminar);
               $respuestaeliminar="Se ha eliminado usuario.";
               echo $respuestaeliminar;
@@ -65,28 +62,6 @@
       }
       ?>
     </div>
-    <!-- Optional JavaScript; choose one of the two! -->
-
-    <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
-
-    <!-- Option 2: Separate Popper and Bootstrap JS -->
-    <!--
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
-    -->
-  </body>
-</html>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
-
-    <title></title>
-  </head>
-  <body>
-
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
