@@ -55,7 +55,7 @@
 			$consulta = mysqli_query($conexion,$q);
 			$array = mysqli_fetch_array($consulta);
 
-			if($array['contar'>0]){
+			if($array['contar'==1]){
 				$_SESSION['username'] = $usuariol;
 				header("location: index.php");
 			}else{
