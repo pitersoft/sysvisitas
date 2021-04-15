@@ -12,7 +12,7 @@
   </head>
   <body>
     <?php  
-      include 'conexion.php';
+      include '../../../conf/conexion.php';
       $nnombres = $_POST['nnombres'];
       $napellidop = $_POST['napellidop'];
       $napellidom = $_POST['napellidom'];
@@ -23,7 +23,7 @@
       if (isset($_POST['nuevo'])) {
         $agregar="INSERT INTO personas(nombres, apellido_pat, apellido_mat, dni, fecha_nacimiento, telefono, direccion) VALUES ('$nnombres','$napellidop','$napellidom','$ndni','$nfechanac','$ntelefono','$ndireccion');";
 
-        $resultadoagregar=mysqli_query($con,$agregar);
+        $resultadoagregar=mysqli_query($conexion,$agregar);
         $respuestaagregar="Se ha agregado nuevo usuario.";
         echo $respuestaagregar;
         header("location: index.php");

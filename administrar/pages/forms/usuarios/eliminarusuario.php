@@ -38,10 +38,10 @@
     <div class="container-login100" style="background-image: url('img/fondo.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center;width: 80%;margin-left: 10%; margin-top: 150px;">
     <div class="wrap-login100 p-l-20 p-r-30 p-t-10 p-b-30">
        <?php
-      include 'conexion.php';
+      include '../../../conf/conexion.php';
       $id=$_GET['id'];
       $sql="SELECT * FROM usuario INNER JOIN niveles ON usuario.idnivel = niveles.idnivel WHERE idusuario='".$id."'";
-      $resultado=mysqli_query($con,$sql);
+      $resultado=mysqli_query($conexion,$sql);
         while ($fila=mysqli_fetch_assoc($resultado)) {
       ?>
       <form action="" method="POST">
@@ -52,7 +52,7 @@
           $idmu=$_GET['id'];
             if (isset($_POST['eliminar'])) {
               $eliminar="DELETE FROM usuario WHERE idusuario='$id'";
-              $resultadoeliminar=mysqli_query($con,$eliminar);
+              $resultadoeliminar=mysqli_query($conexion,$eliminar);
               $respuestaeliminar="Se ha eliminado usuario.";
               echo $respuestaeliminar;
             } 

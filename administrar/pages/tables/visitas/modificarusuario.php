@@ -38,10 +38,10 @@
     <div class="container-login100" style="background-image: url('img/fondo.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center;width: 360px;margin-left: 30%;">
     <div class="wrap-login100 p-l-20 p-r-30 p-t-10 p-b-30">
        <?php
-      include 'conexion.php';
+      include '../../../conf/conexion.php';
       $id=$_GET['id'];
       $sql="SELECT * FROM visitas INNER JOIN personas ON visitas.idpersona = personas.idpersona WHERE codigo_visita='".$id."'";
-      $resultado=mysqli_query($con,$sql);
+      $resultado=mysqli_query($conexion,$sql);
         while ($fila=mysqli_fetch_assoc($resultado)) {
       ?>
       <form action="" method="POST">
@@ -75,7 +75,7 @@
             $mfechasal = $_POST['mfechasal'];
             if (isset($_POST['editar'])) {
               $editar="UPDATE visitas SET codigo_visita= '$idmu',fh_ingreso='$mfechaing',fh_salida='$mfechasal' WHERE idpersona='$idmu'";
-              $resultadonuevo=mysqli_query($con,$editar);
+              $resultadonuevo=mysqli_query($conexion,$editar);
               $respuestanuevo="Se ha modificadoado usuario.";
               echo $respuestanuevo;
             } else {

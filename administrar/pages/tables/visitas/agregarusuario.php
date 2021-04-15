@@ -12,14 +12,14 @@
   </head>
   <body>
     <?php  
-      include 'conexion.php';
+      include '../../../conf/conexion.php';
       $personanombre = $_POST['personanombre'];
       $nfechaing = $_POST['nfechaing'];
       $nfechasal = $_POST['nfechasal'];
       if (isset($_POST['nuevo'])) {
         $agregar="INSERT INTO visitas(idpersona, fh_ingreso, fh_salida) VALUES ('$personanombre','$nfechaing','$nfechasal');";
 
-        $resultadoagregar=mysqli_query($con,$agregar);
+        $resultadoagregar=mysqli_query($conexion,$agregar);
         $respuestaagregar="Se ha agregado nuevo usuario.";
         echo $respuestaagregar;
         header("location: index.php");

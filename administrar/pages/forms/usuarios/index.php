@@ -16,7 +16,7 @@
 <body class="" style="width: 100%;">
 	<div class="bg-ligth" style="width: 100%;">
 		<?php
-		    include 'conexion.php';
+		    include '../../../conf/conexion.php';
 		?>
 		<div class="row justify-content-center" style="width: 100%;">
 			<div class=" bg-light rounded my-2 mx-2 ml-1" style="width: 98%;padding: 20px 0px 20px 30px;">
@@ -48,7 +48,7 @@
 			                  <label for="exampleInputNivel1" class="form-label">Nivel</label>
 			                  <select class="form-select" name="nnivel" id="exampleInputNivel1">
 			                    <?php 
-			                        $query=mysqli_query($con,"SELECT * FROM niveles");
+			                        $query=mysqli_query($conexion,"SELECT * FROM niveles");
 			                        while($nivel = mysqli_fetch_array($query))
 			                        {
 			                    ?>
@@ -107,7 +107,7 @@
 						<?php
 							require 'conexion.php';
 							$sqlbq="SELECT * FROM usuario INNER JOIN niveles ON usuario.idnivel = niveles.idnivel";
-							$res=$con->query($sqlbq);
+							$res=$conexion->query($sqlbq);
 							while($row=$res->fetch_assoc()){ 
 						?>
 						<tr>

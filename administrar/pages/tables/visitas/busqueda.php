@@ -12,9 +12,9 @@
   </head>
   <body>
     <?php
-    include 'conexion.php';
+    include '../../../conf/conexion.php';
     $sql="SELECT * FROM usuario INNER JOIN niveles ON usuario.idnivel = niveles.idnivel ORDER BY idusuario ASC;";
-    $resultado=mysqli_query($con,$sql);  
+    $resultado=mysqli_query($conexion,$sql);  
     ?>
     <div class="container my-5">
       <nav class="navbar navbar-light bg-light col-12">
@@ -28,7 +28,7 @@
             if (isset($_POST['enviar'])) {
               $busqueda = trim($_POST['buscar']);
               $sqlb = "SELECT usuario.nombre, usuario.apellidos, usuario.email, niveles.nivel, acceso.fecha_hora_acceso FROM usuario INNER JOIN acceso ON usuario.idusuario = acceso.idusuario INNER JOIN niveles ON usuario.idnivel = niveles.idnivel WHERE nombre LIKE '%$busqueda%' OR apellidos LIKE '%$busqueda%'";
-              foreach ($con->query($sqlb) as $row) {
+              foreach ($conexion->query($sqlb) as $row) {
                  echo $row['nombre'] . " " . $row['apellidos'] . "<br />";
                  echo "E-Mail: " . $row['email'] . "<br />";
                  echo "Nivel: " . $row['nivel'] . "<br />";
@@ -66,7 +66,7 @@
                   <label for="exampleInputNivel1" class="form-label">Nivel</label>
                   <select class="form-select" name="nnivel" id="exampleInputNivel1">
                     <?php 
-                        $query=mysqli_query($con,"SELECT * FROM niveles");
+                        $query=mysqli_query($conexion,"SELECT * FROM niveles");
                         while($nivel = mysqli_fetch_array($query))
                         {
                     ?>

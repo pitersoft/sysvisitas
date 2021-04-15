@@ -167,9 +167,9 @@ if(!isset($usuario)){
         </a>
       </li>
       <?php
-          $con=mysqli_connect("localhost","root","","basesistema");
+          include 'conf/conexion.php';
           $sell= "SELECT * FROM usuario WHERE email='$usuario'";
-          $query=mysqli_query($con,$sell);
+          $query=mysqli_query($conexion,$sell);
           while($datos = mysqli_fetch_array($query))
           {
       ?>
@@ -203,7 +203,7 @@ if(!isset($usuario)){
                 $subido = move_uploaded_file($tmp_name, $directorio.$nombre);
               }
               $queryimg="UPDATE usuario SET nombre='$nombreimg', perfil='$nombre' WHERE email='$usuario'";
-              $resultadoimg=$con->query($queryimg);
+              $resultadoimg=$conexion->query($queryimg);
               if ($resultadoimg) {
                 echo '<br><div class="alert alert-success">Se guardo imagen.</div>';
                 $url='index.php';

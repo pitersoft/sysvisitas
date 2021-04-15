@@ -24,9 +24,9 @@
   <?php
 
     include 'plantilla.php';
-    require 'conect.php';
+    require '../../../../conf/conexion.php';
     $query = "SELECT * FROM visitas INNER JOIN personas ON visitas.idpersona = personas.idpersona";
-    $resultado = $mysqli->query($query);
+    $resultado = $conexion->query($query);
 
     $pdf = new PDF();
     $pdf->AliasNbPages();

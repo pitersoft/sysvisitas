@@ -16,7 +16,7 @@
 <body class="" style="width: 100%;">
 	<div class="bg-ligth" style="width: 100%;">
 		<?php
-		    include 'conexion.php';
+		    include '../../../conf/conexion.php';
 		?>
 		<div class="row justify-content-center" style="width: 100%;">
 			<div class=" bg-light rounded my-2 mx-2 ml-1" style="width: 98%;padding: 20px 0px 20px 30px;">
@@ -31,9 +31,9 @@
 					<input style="width: 170px;" type="date" name="filtrosal" class="form-control me-5">
 					<input style="width: 150px;" type="submit" class="btn btn-dark" data-bs-toggle="modal" name="exportf" data-bs-target="#exampleModal" value="Exportar PDF">
 				    </form>
-					<button style="width: 120px;" type="button" class="btn btn-success col-1 me-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
+					<!-- <button style="width: 120px;" type="button" class="btn btn-success col-1 me-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
 				       Nuevo
-				    </button>
+				    </button> -->
 				</div>
 
 				<!-- Modal -->
@@ -71,9 +71,9 @@
 			                  <input class="form-control" name="personanombre" id="exampleInputNombres" list="nombrespersonas">
 			                  <datalist id="nombrespersonas">
 			                  	<?php
-									require 'conexion.php';
+									require '../../../conf/conexion.php';
 									$sqlnom="SELECT * FROM visitas INNER JOIN personas ON visitas.idpersona = personas.idpersona";
-									$resnom=$con->query($sqlnom);
+									$resnom=$conexion->query($sqlnom);
 									while($rownom=$resnom->fetch_assoc()){ 
 								?>
 								<option value="<?php echo $rownom['idpersona']; ?>"><?php echo $rownom['nombres']." ".$rownom['apellido_pat']." ".$rownom['apellido_mat']; ?></option>
@@ -112,9 +112,8 @@
 					</thead>
 					<tbody>
 						<?php
-							require 'conexion.php';
 							$sqlbq="SELECT * FROM visitas INNER JOIN personas ON visitas.idpersona = personas.idpersona";
-							$res=$con->query($sqlbq);
+							$res=$conexion->query($sqlbq);
 							while($row=$res->fetch_assoc()){ 
 						?>
 						<tr>

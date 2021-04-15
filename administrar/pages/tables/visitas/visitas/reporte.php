@@ -1,15 +1,15 @@
 <?php
 
     include 'plantilla.php';
-    require 'conect.php';
+    require '../../../../conf/conexion.php';
     if (!empty($_POST)) {
 
-        $fing = mysqli_escape_string($mysqli, $_POST['filtroing']);
-        $fsal = mysqli_escape_string($mysqli, $_POST['filtrosal']);
-        $filtroing = mysqli_escape_string($mysqli, $_POST['filtroing']." 00:00:00");
-        $filtrosal = mysqli_escape_string($mysqli, $_POST['filtrosal']." 23:59:59");
+        $fing = mysqli_escape_string($conexion, $_POST['filtroing']);
+        $fsal = mysqli_escape_string($conexion, $_POST['filtrosal']);
+        $filtroing = mysqli_escape_string($conexion, $_POST['filtroing']." 00:00:00");
+        $filtrosal = mysqli_escape_string($conexion, $_POST['filtrosal']." 23:59:59");
         $query = "SELECT * FROM visitas INNER JOIN personas ON visitas.idpersona = personas.idpersona WHERE fh_ingreso BETWEEN '$filtroing' AND '$filtrosal'";
-        $resultado = $mysqli->query($query);
+        $resultado = $conexion->query($query);
 
         $pdf = new PDF();
         $pdf->AliasNbPages();

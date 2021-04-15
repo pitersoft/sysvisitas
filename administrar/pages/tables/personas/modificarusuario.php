@@ -38,10 +38,10 @@
     <div class="container-login100" style="background-image: url('img/fondo.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center;width: 360px;margin-left: 30%;">
     <div class="wrap-login100 p-l-20 p-r-30 p-t-10 p-b-30">
        <?php
-      include 'conexion.php';
+      include '../../../conf/conexion.php';
       $id=$_GET['id'];
       $sql="SELECT * FROM personas WHERE idpersona='".$id."'";
-      $resultado=mysqli_query($con,$sql);
+      $resultado=mysqli_query($conexion,$sql);
         while ($fila=mysqli_fetch_assoc($resultado)) {
       ?>
       <form action="" method="POST">
@@ -96,7 +96,7 @@
             $mdireccion=$_POST['mdireccion'];
             if (isset($_POST['editar'])) {
               $editar="UPDATE personas SET idpersona= '$idmu',nombres='$mnombres',apellido_pat='$mapellidop',apellido_mat='$mapellidom',dni='$mdni',fecha_nacimiento='$mfechanac',telefono='$mtelefono',direccion='$mdireccion' WHERE idpersona='$idmu'";
-              $resultadonuevo=mysqli_query($con,$editar);
+              $resultadonuevo=mysqli_query($conexion,$editar);
               $respuestanuevo="Se ha modificadoado usuario.";
               echo $respuestanuevo;
             } else {
