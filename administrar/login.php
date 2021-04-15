@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../css/util.css">
     <link rel="stylesheet" type="text/css" href="../css/main.css">
   <!--===============================================================================================-->
-    <title>Login Administrador</title>
+    <title>Login </title>
   </head>
   <body>
     <div class="container-login100" style="background-image: url('../img/fondo.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center;">
@@ -42,7 +42,7 @@
           <img src="img/favicon.ico" alt="">
         </div>
         <span class="login100-form-title p-b-37">
-          Administrador
+          Iniciar Sesión
         </span>
 
         <div class="wrap-input100 validate-input m-b-20" data-validate="Ingrese correo electrónico">
@@ -62,8 +62,8 @@
         </div>
       </form>
        <div class="text-center">
-          <a href="../login.php" class="txt2 hov1">
-            Volver a Login
+          <a href="recuperarpassword.php" class="txt2 hov1">
+           ¿OLvidaste tu Contraseña?
           </a>
         </div>
       

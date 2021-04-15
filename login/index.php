@@ -1,3 +1,12 @@
+<?php  
+
+session_start();
+$usuario = $_SESSION['username'];
+
+if(!isset($usuario)){
+	header("location: login.php");
+}
+?>
 <html lang="en">
   <head>
     <!-- Required meta tags -->
@@ -58,7 +67,7 @@
               <input class="form-control me-2" type="search" placeholder="Buscar..." aria-label="Search">
               <button class="btn btn-outline-success" type="submit">Buscar</button>
             </form>
-            <a class="btn btn-danger mt-3 m-auto me-4" href='administrar/login.php'>Login</a>
+            <a class="btn btn-danger mt-3 m-auto me-4" href='salir.php'>Salir</a>
           </div>
         </div>
       </nav>
@@ -75,7 +84,7 @@
             <a class="btn btn-danger col-1" href='salir.php'>Salir</a>
           </div>
       </nav> -->
-      <div class="h1" style="padding-top: 120px; width: 100%; text-align: center;"></div>
+      <div class="h1" style="padding-top: 120px; width: 100%; text-align: center;"><?php echo strtoupper($usuario); ?></div>
       <div style="width: 100%; height: 630px;background-image: url(images/fondo2.PNG);background-repeat: no-repeat;background-size: cover;background-position: center;">
         Lorem ipsum dolor sit amet consectetur, adipisicing, elit. Porro, voluptates quasi iste fugit consequatur vitae inventore magni esse ipsum ratione sapiente sint fugiat laboriosam dolorum, cumque asperiores aperiam laudantium accusamus.
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus labore eius cupiditate voluptates neque molestiae, necessitatibus magnam temporibus est pariatur alias totam laborum cumque impedit quidem dolore unde facilis reprehenderit.
@@ -115,6 +124,3 @@
     -->
   </body>
 </html>
-<?php  
-	header('location: administrar/login.php');
-?>
