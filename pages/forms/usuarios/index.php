@@ -105,7 +105,7 @@
 					</thead>
 					<tbody>
 						<?php
-							require 'conexion.php';
+							require '../../../conf/conexion.php';
 							$sqlbq="SELECT * FROM usuario INNER JOIN niveles ON usuario.idnivel = niveles.idnivel";
 							$res=$conexion->query($sqlbq);
 							while($row=$res->fetch_assoc()){ 
