@@ -31,30 +31,7 @@
 					<input style="width: 170px;" type="date" name="filtrosal" class="form-control me-5">
 					<input style="width: 150px;" type="submit" class="btn btn-dark" data-bs-toggle="modal" name="exportf" data-bs-target="#exampleModal" value="Exportar PDF">
 				    </form>
-					<!-- <button style="width: 120px;" type="button" class="btn btn-success col-1 me-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
-				       Nuevo
-				    </button> -->
 				</div>
-
-				<!-- Modal -->
-				<!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-				  <div class="modal-dialog modal-xl">
-				    <div class="modal-content">
-				      <div class="modal-header">
-				        <h5 class="modal-title" id="exampleModalLabel">Reporte</h5>
-				        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				      </div>
-				      <div class="modal-body">
-				       <iframe style="width: 100%;height: 1000px;border-style: none;" src="visitas/reporte.php"></iframe>
-				      </div>
-				      <div class="modal-footer">
-				        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-				        <button type="button" class="btn btn-primary">Descargar</button>
-				      </div>
-				    </div>
-				  </div>
-				</div>
-			</div> -->
 
 			      <!-- Nuevo Usuaario -->
 			      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -106,8 +83,7 @@
 							<th scope="col">CÓDIGO DE VISITA</th>
 				            <th scope="col">NOMBRES Y APELLIDOS</th>
 				            <th scope="col">FECHA DE INGRESO</th>
-				            <th scope="col">FECHA DE SALIDA</th>				            
-				            <!-- <th scope="col">MANTENIMIENTOS</th> -->
+				            <th scope="col">FECHA DE SALIDA</th>	
 						</tr>
 					</thead>
 					<tbody>
@@ -121,14 +97,6 @@
 				            <td><?php echo $row['nombres']." ".$row['apellido_pat']." ".$row['apellido_mat']; ?></td>
 				            <td><?php echo $row['fh_ingreso']; ?></td>
 				            <td><?php echo $row['fh_salida']; ?></td>
-				            <!-- <td>
-				              <a href="modificarusuario.php?id=<?php echo $row['codigo_visita']; ?>" class="btn btn-warning">
-				                Editar
-				              </a>
-				              <a href="eliminarusuario.php?id=<?php echo $row['codigo_visita']; ?>" class="btn btn-danger">
-				                Eliminar
-				              </a>
-				            </td>   -->
 						</tr>
 						<?php
 							}  
