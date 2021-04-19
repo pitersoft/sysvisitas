@@ -17,13 +17,24 @@
 	<div class="bg-ligth" style="width: 100%;">
 		<?php
 		    include '../../../conf/conexion.php';
+		     $sellac= "SELECT * FROM usuario WHERE email='$usuario'";
+          $queryac=mysqli_query($conexion,$sellac);
+          while($acceso = mysqli_fetch_array($queryac))
+          {
 		?>
 		<div class="row justify-content-center" style="width: 100%;">
 			<div class=" bg-light rounded my-2 mx-2 ml-1" style="width: 98%;padding: 20px 0px 20px 30px;">
 				<h4 class="text-center text-dark pt-2">Personas</h4>
-			    <button type="button" class="btn btn-success col-1" data-bs-toggle="modal" data-bs-target="#exampleModal">
+				<?php
+				if ($acceso['login']==1) {
+					echo '<button type="button" class="btn btn-success col-1" data-bs-toggle="modal" data-bs-target="#exampleModal">
 			       Nuevo
-			    </button>
+			    </button>';
+				}
+				?>
+			    <?php  
+			    	}
+				?>
 
 			      <!-- Nuevo Usuaario -->
 			      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -84,12 +95,22 @@
 				            <th scope="col">FECHA NACIMIENTO</th>
 				            <th scope="col">TELÉFONO</th>
 				            <th scope="col">DIRECCIÓN</th>
-				            <th scope="col">MANTENIMIENTOS</th>
+				            <?php
+					          while($acceso1 = mysqli_fetch_array($queryac))
+					          {
+							?>
+							<?php
+							if ($acceso1['login']==1) {
+								echo '<th scope="col">MANTENIMIENTOS</th>';
+							}
+							?>
+						    <?php  
+						    	}
+							?>
 						</tr>
 					</thead>
 					<tbody>
 						<?php
-							require '../../../conf/conexion.php';
 							$sqlbq="SELECT * FROM personas";
 							$res=$conexion->query($sqlbq);
 							while($row=$res->fetch_assoc()){ 
@@ -103,14 +124,25 @@
 				            <td><?php echo $row['fecha_nacimiento']; ?></td>
 				            <td><?php echo $row['telefono']; ?></td>
 				            <td><?php echo $row['direccion']; ?></td>
-				            <td>
-				              <a href="modificarusuario.php?id=<?php echo $row['idpersona']; ?>" class="btn btn-warning">
+				            <?php
+					          while($acceso2 = mysqli_fetch_array($queryac))
+					          {
+							?>
+							<?php
+							if ($acceso2['login']==1) {
+								echo '<td>
+				              <a href="modificarusuario.php?id=<?php echo $row[\'idpersona\']; ?>" class="btn btn-warning">
 				                Editar
 				              </a>
-				              <a href="eliminarusuario.php?id=<?php echo $row['idpersona']; ?>" class="btn btn-danger">
+				              <a href="eliminarusuario.php?id=<?php echo $row[\'idpersona\']; ?>" class="btn btn-danger">
 				                Eliminar
 				              </a>
-				            </td>  
+				            </td>';
+							}
+							?>
+						    <?php  
+						    	}
+							?>
 						</tr>
 						<?php
 							}  

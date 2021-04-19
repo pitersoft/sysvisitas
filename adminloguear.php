@@ -50,7 +50,7 @@
 			$usuarioad = $_POST['usuarioad'];
 			$clavead = $_POST['contrasenaad'];
 
-			$q = "SELECT COUNT(*) FROM usuario where email = '$usuarioad' and password = '$clavead' and login = 1";
+			$q = "SELECT COUNT(*) FROM usuario where email = '$usuarioad' and password = '$clavead'";
 			$consulta = mysqli_query($conexion,$q);
 			$array = mysqli_fetch_array($consulta);
 

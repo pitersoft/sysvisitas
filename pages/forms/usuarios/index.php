@@ -1,3 +1,11 @@
+<?php  
+
+session_start();
+$usuario = $_SESSION['username'];
+if(!isset($usuario)){
+  header("location: login.php");
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,15 +24,25 @@
 <body class="" style="width: 100%;">
 	<div class="bg-ligth" style="width: 100%;">
 		<?php
-		    include '../../../conf/conexion.php';
+		  include '../../../conf/conexion.php';
+          $sellac= "SELECT * FROM usuario WHERE email='$usuario'";
+          $queryac=mysqli_query($conexion,$sellac);
+          while($acceso = mysqli_fetch_array($queryac))
+          {
 		?>
 		<div class="row justify-content-center" style="width: 100%;">
 			<div class=" bg-light rounded my-2 mx-2 ml-1" style="width: 98%;padding: 20px 0px 20px 30px;">
 				<h4 class="text-center text-dark pt-2">Registro de Usuarios</h4>
-			    <button type="button" class="btn btn-success col-1" data-bs-toggle="modal" data-bs-target="#exampleModal">
+				<?php
+				if ($acceso['login']==1) {
+					echo '<button type="button" class="btn btn-success col-1" data-bs-toggle="modal" data-bs-target="#exampleModal">
 			       Nuevo
-			    </button>
-			    </nav>
+			    </button>';
+				}
+				?>
+			    <?php  
+			    	}
+				?>
 
 			      <!-- Nuevo Usuaario -->
 			      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -100,12 +118,22 @@
 				            <th scope="col">CORREO</th>
 				            <th scope="col">LOGIN</th>
 				            <th scope="col">ESTADO</th>
-				            <th scope="col">ACCIONES</th>
+				            <?php
+					          while($acceso1 = mysqli_fetch_array($queryac))
+					          {
+							?>
+							<?php
+							if ($acceso1['login']==1) {
+								echo '<th scope="col">ACCIONES</th>';
+							}
+							?>
+						    <?php  
+						    	}
+							?>
 						</tr>
 					</thead>
 					<tbody>
 						<?php
-							require '../../../conf/conexion.php';
 							$sqlbq="SELECT * FROM usuario INNER JOIN niveles ON usuario.idnivel = niveles.idnivel";
 							$res=$conexion->query($sqlbq);
 							while($row=$res->fetch_assoc()){ 
@@ -130,14 +158,25 @@
 				                echo "Deshabilitado";
 				                } ?>
 				            </td>
-				            <td>
-				              <a href="modificarusuario.php?id=<?php echo $row['idusuario']; ?>" class="btn btn-warning">
+				            <?php
+					          while($acceso2 = mysqli_fetch_array($queryac))
+					          {
+							?>
+							<?php
+							if ($acceso2['login']==1) {
+								echo '<td>
+				              <a href="modificarusuario.php?id=<?php echo $row[\'idusuario\']; ?>" class="btn btn-warning">
 				                Editar
 				              </a>
-				              <a href="eliminarusuario.php?id=<?php echo $row['idusuario']; ?>" class="btn btn-danger">
+				              <a href="eliminarusuario.php?id=<?php echo $row[\'idusuario\']; ?>" class="btn btn-danger">
 				                Eliminar
 				              </a>
-				            </td>  
+				            </td>';
+							}
+							?>
+						    <?php  
+						    	}
+							?>
 						</tr>
 						<?php
 							}  
