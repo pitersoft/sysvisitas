@@ -212,7 +212,7 @@ if(!isset($usuario)){
       ?>
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img style="width: 60px;height: 60px;border-radius: 10px;background-color: #fff;" src="imgperfil/<?php echo ($datos2['perfil']); ?>" class="img-circle elevation-2" alt="User Image">
+          <img style="width: 60px;height: 60px;border-radius: 100%;background-color: #fff;" src="imgperfil/<?php echo ($datos2['perfil']); ?>" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
           <a class="d-block" style="text-decoration: none;"><?php echo $datos2['nombre']."<br>".$datos2['apellidos']; ?></a>
