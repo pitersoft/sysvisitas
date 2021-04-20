@@ -89,6 +89,7 @@ if(!isset($usuario)){
 			                  <select class="form-select" name="nlogin" id="exampleInputLogin1">
 			                    <option value="0"> Usuario </option>
 			                    <option value="1"> Administrador </option>
+			                    <option value="2"> Controlador </option>
 			                  </select>
 			                </div>
 			                <div class="mb-3 form-check">
@@ -147,10 +148,12 @@ if(!isset($usuario)){
 				            <td><?php echo $row['nivel']; ?></td>
 				            <td><?php echo $row['email']; ?></td>
 				            <td><?php $es=$row['login'];
-				                if ($es==true){
+				                if ($es==1){
 				                echo "Administrador";
-				                }else{
+				                }elseif ($es==0){
 				                echo "Usuario";
+				                }elseif ($es==2){
+				                echo "Controlador";
 				                } ?>
 				            </td>
 				            <td><?php $es=$row['estado'];
@@ -168,14 +171,16 @@ if(!isset($usuario)){
 							?>
 							<?php
 							if ($acceso2['login']==1) {
-								echo '<td>
-				              <a href="modificarusuario.php?id=<?php echo $row[\'idusuario\']; ?>" class="btn btn-warning">
+							?>
+							<td>
+				              <a href="modificarusuario.php?id=<?php echo $row['idusuario']; ?>" class="btn btn-warning">
 				                Editar
 				              </a>
-				              <a href="eliminarusuario.php?id=<?php echo $row[\'idusuario\']; ?>" class="btn btn-danger">
+				              <a href="eliminarusuario.php?id=<?php echo $row['idusuario']; ?>" class="btn btn-danger">
 				                Eliminar
 				              </a>
-				            </td>';
+				            </td>
+				            <?php
 							}
 							?>
 						    <?php  

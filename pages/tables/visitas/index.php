@@ -1,3 +1,11 @@
+<?php  
+
+session_start();
+$usuario = $_SESSION['username'];
+if(!isset($usuario)){
+  header("location: login.php");
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,14 +25,72 @@
 	<div class="bg-ligth" style="width: 100%;">
 		<?php
 		    include '../../../conf/conexion.php';
+          $sellac= "SELECT * FROM usuario WHERE email='$usuario'";
+          $queryac=mysqli_query($conexion,$sellac);
+          while($acceso = mysqli_fetch_array($queryac))
+          {
 		?>
 		<div class="row justify-content-center" style="width: 100%;">
 			<div class=" bg-light rounded my-2 mx-2 ml-1" style="width: 98%;padding: 20px 0px 20px 30px;">
 				<h4 class="text-center text-dark pt-2">Personas</h4>
 			    <div style="width: 100%;">
 				<div style="width: 100%;display: flex;flex-direction: row;justify-content: space-around;"> 	
+					<?php
+				if ($acceso['login']==2) {
+					echo '<button type="button" class="btn btn-success col-1" data-bs-toggle="modal" data-bs-target="#exampleModal">
+			       Nuevo
+			    </button>';
+				}
+				?>
+			    <?php  
+			    	}
+				?>
+
+			      <!-- Nuevo Usuaario -->
+			      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			        <div class="modal-dialog">
+			          <div class="modal-content">
+			            <div class="modal-header">
+			              <h5 class="modal-title" id="exampleModalLabel">Registrar Visitas</h5>
+			              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			            </div>
+			            <form action="agregarvisita.php" method="POST">
+			              <div class="modal-body">
+			                <div class="mb-3 form-check">
+			                  <label for="exampleInputUsuarionombre" class="form-label">Nombres</label>
+			                  <input class="form-control" name="rnombrevisitas" id="exampleInputUsuarionombre" list="usuariosv">
+			                  <datalist id="usuariosv">
+			                  	<?php 
+			                        $vist=mysqli_query($conexion,"SELECT * FROM personas");
+			                        while($namevis = mysqli_fetch_array($vist))
+			                        {
+			                    ?>
+			                    <option value="<?php echo $namevis['idpersona']; ?>"><?php echo $namevis['nombres'].$namevis['apellido_pat'].$namevis['apellido_mat']; ?></option>
+			                    <?php
+			                        }
+			                    ?>
+			                   	<option></option>
+			                  </datalist>
+			                </div>
+			                <div class="mb-3 form-check">
+			                  <label for="exampleInputFingr" class="form-label">Fecha Ingreso</label>
+			                  <input type="datetime-local" class="form-control" name="rfechaing" id="exampleInputFingr">
+			                </div>
+			                <div class="mb-3 form-check">
+			                  <label for="exampleInputFsalr" class="form-label">Fecha Salida</label>
+			                  <input type="datetime-local" class="form-control" name="rfechasal" id="exampleInputFsalr">
+			                </div>
+			              </div>
+			              <div class="modal-footer">
+			                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+			                <input type="submit" name="agregarvisita" class="btn btn-success" value="Agregar">
+			              </div>
+			            </form>
+			          </div>
+			        </div>
+			      </div>
 					<form method="POST" style="width: 70%;display: flex;flex-direction: row;justify-content: space-around;" action="">
-						<label style="width: 110px;padding-top: 10px;" class="form-label" for="">Fecha Inicio</label>
+						<label style="width: 110px;padding-top: 10px; margin-left: 100px;" class="form-label" for="">Fecha Inicio</label>
 						<input style="width: 170px;" type="date" name="filtroingb" class="form-control me-3">
 						<label style="width: 110px;padding-top: 10px;" class="form-label" for="">Fecha Final</label>
 						<input style="width: 170px;" type="date" name="filtrosalb" class="form-control me-5">

@@ -142,14 +142,16 @@ if(!isset($usuario)){
 							?>
 							<?php
 							if ($acceso2['login']==1) {
-								echo '<td>
-				              <a href="modificarusuario.php?id=<?php echo $row[\'idpersona\']; ?>" class="btn btn-warning">
+							?>
+							<td>
+				              <a href="modificarusuario.php?id=<?php echo $row['idpersona']; ?>" class="btn btn-warning">
 				                Editar
 				              </a>
-				              <a href="eliminarusuario.php?id=<?php echo $row[\'idpersona\']; ?>" class="btn btn-danger">
+				              <a href="eliminarusuario.php?id=<?php echo $row['idpersona']; ?>" class="btn btn-danger">
 				                Eliminar
 				              </a>
-				            </td>';
+				            </td>
+				            <?php
 							}
 							?>
 						    <?php  

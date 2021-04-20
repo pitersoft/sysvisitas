@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 20-04-2021 a las 00:17:01
+-- Tiempo de generación: 21-04-2021 a las 01:38:09
 -- Versión del servidor: 10.4.18-MariaDB
 -- Versión de PHP: 8.0.3
 
@@ -114,7 +114,7 @@ CREATE TABLE `usuario` (
   `apellidos` varchar(45) NOT NULL,
   `email` varchar(30) NOT NULL,
   `password` varchar(18) NOT NULL,
-  `login` tinyint(1) NOT NULL,
+  `login` int(1) NOT NULL,
   `estado` tinyint(1) NOT NULL,
   `fecha_creacion` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `fecha_comunicacion` datetime NOT NULL,
@@ -138,8 +138,9 @@ INSERT INTO `usuario` (`idusuario`, `idnivel`, `nombre`, `apellidos`, `email`, `
 (10, 3, 'A1', 'Abarrotes', 'contacto@a1.com.pe', 'jhko475a1', 0, 1, '2021-04-10 04:27:38', '2021-03-18 18:59:12', 'perfil.png'),
 (11, 2, 'Huerta Grande ', 'Bodega', 'huertagrande@gmail.com', 'huertagrande', 0, 1, '2021-04-10 04:27:41', '2021-03-19 16:58:26', 'perfil.png'),
 (12, 3, 'Epson', 'Impresoras', 'contacto@epson.com.pe', 'epson12345', 0, 1, '2021-04-10 04:27:44', '0000-00-00 00:00:00', 'perfil.png'),
-(13, 1, 'Administrador', 'admin', 'admin@gmail.com', 'admin', 1, 1, '2021-04-10 04:45:58', '0000-00-00 00:00:00', 'circle-cropped (1).png'),
-(14, 1, 'Gustavo', 'Santos', 'gustavograos01@gmail.com', 'parkour123', 0, 1, '2021-04-19 22:16:05', '0000-00-00 00:00:00', 'descarga (2).jpg');
+(13, 1, 'Administrador', 'admin', 'admin@gmail.com', 'admin', 1, 1, '2021-04-20 23:30:21', '0000-00-00 00:00:00', 'circle-cropped (1).png'),
+(14, 1, 'Gustavo', 'Santos', 'gustavograos01@gmail.com', 'parkour123', 0, 1, '2021-04-19 22:16:05', '0000-00-00 00:00:00', 'descarga (2).jpg'),
+(15, 1, 'Gustavo', 'Santos', 'nuevo@gmail.com', '123456789', 2, 1, '2021-04-20 21:00:38', '0000-00-00 00:00:00', 'perfil.png');
 
 -- --------------------------------------------------------
 
@@ -162,7 +163,10 @@ INSERT INTO `visitas` (`codigo_visita`, `idpersona`, `fh_ingreso`, `fh_salida`) 
 (1, 1, '2021-04-06 12:33:00', '2021-04-06 20:33:00'),
 (2, 2, '2021-04-05 12:33:00', '2021-04-05 20:33:00'),
 (3, 1, '2021-04-07 19:52:00', '2021-04-07 23:52:00'),
-(4, 3, '2021-03-31 16:03:00', '2021-04-01 16:03:00');
+(4, 3, '2021-03-31 16:03:00', '2021-04-01 16:03:00'),
+(5, 2, '2021-04-14 18:03:58', '2021-04-14 18:03:58'),
+(6, 3, '2021-04-13 18:04:17', '2021-04-15 18:04:23'),
+(7, 1, '2021-04-08 17:55:00', '2021-04-08 18:56:00');
 
 --
 -- Índices para tablas volcadas
@@ -224,13 +228,13 @@ ALTER TABLE `personas`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `idusuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `idusuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `visitas`
 --
 ALTER TABLE `visitas`
-  MODIFY `codigo_visita` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `codigo_visita` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
