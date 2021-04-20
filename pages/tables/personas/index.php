@@ -1,3 +1,11 @@
+<?php  
+
+session_start();
+$usuario = $_SESSION['username'];
+if(!isset($usuario)){
+  header("location: login.php");
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -96,6 +104,8 @@
 				            <th scope="col">TELÉFONO</th>
 				            <th scope="col">DIRECCIÓN</th>
 				            <?php
+				             $sellac= "SELECT * FROM usuario WHERE email='$usuario'";
+          					$queryac=mysqli_query($conexion,$sellac);
 					          while($acceso1 = mysqli_fetch_array($queryac))
 					          {
 							?>
@@ -125,6 +135,8 @@
 				            <td><?php echo $row['telefono']; ?></td>
 				            <td><?php echo $row['direccion']; ?></td>
 				            <?php
+				             $sellac= "SELECT * FROM usuario WHERE email='$usuario'";
+          					$queryac=mysqli_query($conexion,$sellac);
 					          while($acceso2 = mysqli_fetch_array($queryac))
 					          {
 							?>

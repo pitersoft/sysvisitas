@@ -119,6 +119,8 @@ if(!isset($usuario)){
 				            <th scope="col">LOGIN</th>
 				            <th scope="col">ESTADO</th>
 				            <?php
+				             $sellac= "SELECT * FROM usuario WHERE email='$usuario'";
+          					$queryac=mysqli_query($conexion,$sellac);
 					          while($acceso1 = mysqli_fetch_array($queryac))
 					          {
 							?>
@@ -159,6 +161,8 @@ if(!isset($usuario)){
 				                } ?>
 				            </td>
 				            <?php
+				             $sellac= "SELECT * FROM usuario WHERE email='$usuario'";
+          					$queryac=mysqli_query($conexion,$sellac);
 					          while($acceso2 = mysqli_fetch_array($queryac))
 					          {
 							?>

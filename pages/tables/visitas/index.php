@@ -22,60 +22,31 @@
 			<div class=" bg-light rounded my-2 mx-2 ml-1" style="width: 98%;padding: 20px 0px 20px 30px;">
 				<h4 class="text-center text-dark pt-2">Personas</h4>
 			    <div style="width: 100%;">
-				<!-- Button trigger modal -->
 				<div style="width: 100%;display: flex;flex-direction: row;justify-content: space-around;"> 	
-					<form method="POST" style="width: 70%;display: flex;flex-direction: row;justify-content: space-around;" action="visitas/reporte.php">
-					<label style="width: 110px;padding-top: 10px;" class="form-label" for="">Fecha Inicio</label>
-					<input style="width: 170px;" type="date" name="filtroing" class="form-control me-3">
-					<label style="width: 110px;padding-top: 10px;" class="form-label" for="">Fecha Final</label>
-					<input style="width: 170px;" type="date" name="filtrosal" class="form-control me-5">
-					<input style="width: 150px;" type="submit" class="btn btn-dark" data-bs-toggle="modal" name="exportf" data-bs-target="#exampleModal" value="Exportar PDF">
+					<form method="POST" style="width: 70%;display: flex;flex-direction: row;justify-content: space-around;" action="">
+						<label style="width: 110px;padding-top: 10px;" class="form-label" for="">Fecha Inicio</label>
+						<input style="width: 170px;" type="date" name="filtroingb" class="form-control me-3">
+						<label style="width: 110px;padding-top: 10px;" class="form-label" for="">Fecha Final</label>
+						<input style="width: 170px;" type="date" name="filtrosalb" class="form-control me-5">
+						<input style="width: 100px;" type="submit" class="btn btn-success me-2" value="Buscar" name="buscarf" id="buscarf">
+					<?php
+			    	if (isset($_POST['buscarf'])==true) {
+			    		$filtroingb = mysqli_escape_string($conexion, $_POST['filtroingb']." 00:00:00");
+        				$filtrosalb = mysqli_escape_string($conexion, $_POST['filtrosalb']." 23:59:59");
+					}
+					?>
 				    </form>
+				    <form action="visitas/reporte.php" method="post">
+						<input style="width: 170px;" type="hidden" name="filtroing" class="form-control me-3" value="<?php echo $filtroingb; ?>">
+						<input style="width: 170px;" type="hidden" name="filtrosal" class="form-control me-5" value="<?php echo $filtrosalb; ?>">
+						<?php
+				    	if (isset($_POST['buscarf'])==true) {
+						  	echo '<input style="width: 150px;" type="submit" class="btn btn-dark me-2"  name="exportf" value="Exportar PDF">';
+						}
+						?>
+					</form>
 				</div>
 
-			      <!-- Nuevo Usuaario -->
-			      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-			        <div class="modal-dialog">
-			          <div class="modal-content">
-			            <div class="modal-header">
-			              <h5 class="modal-title" id="exampleModalLabel">Nueva Visita</h5>
-			              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-			            </div>
-			            <form action="agregarusuario.php" method="POST">
-			              <div class="modal-body">
-			                <div class="mb-3 form-check">
-			                  <label for="exampleInputNombres" class="form-label">Nombres y Apellidos</label>
-			                  <input class="form-control" name="personanombre" id="exampleInputNombres" list="nombrespersonas">
-			                  <datalist id="nombrespersonas">
-			                  	<?php
-									require '../../../conf/conexion.php';
-									$sqlnom="SELECT * FROM visitas INNER JOIN personas ON visitas.idpersona = personas.idpersona";
-									$resnom=$conexion->query($sqlnom);
-									while($rownom=$resnom->fetch_assoc()){ 
-								?>
-								<option value="<?php echo $rownom['idpersona']; ?>"><?php echo $rownom['nombres']." ".$rownom['apellido_pat']." ".$rownom['apellido_mat']; ?></option>
-								<?php
-									}  
-								?>
-			                  </datalist>
-			                </div>
-			                <div class="mb-3 form-check">
-			                  <label for="exampleInputFechaing" class="form-label">Fecha Ingreso</label>
-			                  <input type="datetime-local" class="form-control" name="nfechaing" id="exampleInputFechaing">
-			                </div>
-			                <div class="mb-3 form-check">
-			                  <label for="exampleInputFechasal" class="form-label">Fecha Salida</label>
-			                  <input type="datetime-local" class="form-control" name="nfechasal" id="exampleInputFechasal">
-			                </div>
-			              </div>
-			              <div class="modal-footer">
-			                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-			                <input type="submit" name="nuevo" class="btn btn-success" value="Agregar">
-			              </div>
-			            </form>
-			          </div>
-			        </div>
-			      </div>
 				<hr>
 				<table class="table table-bordered table-striped table-hover">
 					<thead>
@@ -88,7 +59,14 @@
 					</thead>
 					<tbody>
 						<?php
-							$sqlbq="SELECT * FROM visitas INNER JOIN personas ON visitas.idpersona = personas.idpersona";
+							if (isset($_POST['buscarf'])==true) {
+					    		$ingb = mysqli_escape_string($conexion, $_POST['filtroingb']." 00:00:00");
+		        				$salb = mysqli_escape_string($conexion, $_POST['filtrosalb']." 23:59:59");
+								$where = "WHERE fh_ingreso BETWEEN '$ingb' AND '$salb'";
+								$sqlbq="SELECT * FROM visitas INNER JOIN personas ON visitas.idpersona = personas.idpersona $where";
+							}else{
+								$sqlbq="SELECT * FROM visitas INNER JOIN personas ON visitas.idpersona = personas.idpersona";
+							}
 							$res=$conexion->query($sqlbq);
 							while($row=$res->fetch_assoc()){ 
 						?>
@@ -99,7 +77,7 @@
 				            <td><?php echo $row['fh_salida']; ?></td>
 						</tr>
 						<?php
-							}  
+							}
 						?>
 					</tbody>	
 				</table>
