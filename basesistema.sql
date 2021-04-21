@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-04-2021 a las 01:38:09
+-- Tiempo de generación: 21-04-2021 a las 02:17:14
 -- Versión del servidor: 10.4.18-MariaDB
 -- Versión de PHP: 8.0.3
 
@@ -73,7 +73,8 @@ CREATE TABLE `niveles` (
 INSERT INTO `niveles` (`idnivel`, `nivel`, `descripcion`, `estado`) VALUES
 (1, 'Cliente', 'Persona Natural que compra productos para su consumo.', ''),
 (2, 'Vendedor', 'Persona Natural o Jurídica que vende los productos comprados.', ''),
-(3, 'Proovedor', 'Persona Jurídica encargada del abastecimiento de los productos.', '');
+(3, 'Proovedor', 'Persona Jurídica encargada del abastecimiento de los productos.', ''),
+(4, 'Controlador', 'Registra visitas en el sistema.', '');
 
 -- --------------------------------------------------------
 
@@ -140,7 +141,7 @@ INSERT INTO `usuario` (`idusuario`, `idnivel`, `nombre`, `apellidos`, `email`, `
 (12, 3, 'Epson', 'Impresoras', 'contacto@epson.com.pe', 'epson12345', 0, 1, '2021-04-10 04:27:44', '0000-00-00 00:00:00', 'perfil.png'),
 (13, 1, 'Administrador', 'admin', 'admin@gmail.com', 'admin', 1, 1, '2021-04-20 23:30:21', '0000-00-00 00:00:00', 'circle-cropped (1).png'),
 (14, 1, 'Gustavo', 'Santos', 'gustavograos01@gmail.com', 'parkour123', 0, 1, '2021-04-19 22:16:05', '0000-00-00 00:00:00', 'descarga (2).jpg'),
-(15, 1, 'Gustavo', 'Santos', 'nuevo@gmail.com', '123456789', 2, 1, '2021-04-20 21:00:38', '0000-00-00 00:00:00', 'perfil.png');
+(15, 4, 'Gustavo', 'Santos', 'nuevo@gmail.com', '123456789', 1, 1, '2021-04-21 00:10:25', '0000-00-00 00:00:00', 'perfil.png');
 
 -- --------------------------------------------------------
 
@@ -216,7 +217,7 @@ ALTER TABLE `acceso`
 -- AUTO_INCREMENT de la tabla `niveles`
 --
 ALTER TABLE `niveles`
-  MODIFY `idnivel` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idnivel` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `personas`
