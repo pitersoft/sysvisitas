@@ -63,6 +63,7 @@
             <option value="1" <?php echo $fila['idnivel'] == 1 ? 'selected' : ''; ?>> Cliente </option>
             <option value="2" <?php echo $fila['idnivel'] == 2 ? 'selected' : ''; ?>> Vendedor </option>
             <option value="3" <?php echo $fila['idnivel'] == 3 ? 'selected' : ''; ?>> Proovedor </option>
+            <option value="4" <?php echo $fila['idnivel'] == 4 ? 'selected' : ''; ?>> Controlador </option>
           </select>
         </div>
         <div class="mb-3 form-check">

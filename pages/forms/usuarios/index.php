@@ -152,8 +152,6 @@ if(!isset($usuario)){
 				                echo "Administrador";
 				                }elseif ($es==0){
 				                echo "Usuario";
-				                }elseif ($es==2){
-				                echo "Controlador";
 				                } ?>
 				            </td>
 				            <td><?php $es=$row['estado'];

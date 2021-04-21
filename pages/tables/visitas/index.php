@@ -36,7 +36,7 @@ if(!isset($usuario)){
 			    <div style="width: 100%;">
 				<div style="width: 100%;display: flex;flex-direction: row;justify-content: space-around;"> 	
 					<?php
-				if ($acceso['login']==2) {
+				if ($acceso['idnivel']==4) {
 					echo '<button type="button" class="btn btn-success col-1" data-bs-toggle="modal" data-bs-target="#exampleModal">
 			       Nuevo
 			    </button>';
