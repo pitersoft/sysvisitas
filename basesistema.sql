@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-04-2021 a las 02:17:14
+-- Tiempo de generación: 22-04-2021 a las 03:41:13
 -- Versión del servidor: 10.4.18-MariaDB
 -- Versión de PHP: 8.0.3
 
@@ -71,10 +71,40 @@ CREATE TABLE `niveles` (
 --
 
 INSERT INTO `niveles` (`idnivel`, `nivel`, `descripcion`, `estado`) VALUES
-(1, 'Cliente', 'Persona Natural que compra productos para su consumo.', ''),
-(2, 'Vendedor', 'Persona Natural o Jurídica que vende los productos comprados.', ''),
-(3, 'Proovedor', 'Persona Jurídica encargada del abastecimiento de los productos.', ''),
-(4, 'Controlador', 'Registra visitas en el sistema.', '');
+(1, 'Cliente', 'Persona Natural que compra productos para su consumo.', '1'),
+(2, 'Vendedor', 'Persona Natural o Jurídica que vende los productos comprados.', '1'),
+(3, 'Proovedor', 'Persona Jurídica encargada del abastecimiento de los productos.', '1'),
+(4, 'Controlador', 'Registra visitas en el sistema.', '1'),
+(5, 'Supervisor', 'Encargado de supervisar.', '1'),
+(6, 'Administrador', 'Encargado de administrar.', '1'),
+(7, 'Contador', 'Contador.', '1');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `permisos`
+--
+
+CREATE TABLE `permisos` (
+  `idpermiso` int(11) NOT NULL,
+  `idnivel` int(11) NOT NULL,
+  `usuarios` int(11) NOT NULL,
+  `personas` int(11) NOT NULL,
+  `visitas` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `permisos`
+--
+
+INSERT INTO `permisos` (`idpermiso`, `idnivel`, `usuarios`, `personas`, `visitas`) VALUES
+(1, 1, 0, 0, 0),
+(2, 2, 0, 0, 0),
+(3, 3, 0, 0, 0),
+(4, 4, 0, 0, 1),
+(5, 6, 0, 0, 0),
+(6, 7, 0, 0, 0),
+(7, 5, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -127,7 +157,7 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`idusuario`, `idnivel`, `nombre`, `apellidos`, `email`, `password`, `login`, `estado`, `fecha_creacion`, `fecha_comunicacion`, `perfil`) VALUES
-(1, 1, 'Gustavo Rivaldo', 'Graos Santos', 'grgs95859@gmail.com', '123456', 1, 1, '2021-04-15 20:22:53', '2021-03-15 17:03:45', 'myAvatar.png'),
+(1, 6, 'Gustavo Rivaldo', 'Graos Santos', 'grgs95859@gmail.com', '123456', 1, 1, '2021-04-22 01:31:24', '2021-03-15 17:03:45', 'myAvatar.png'),
 (2, 2, ' La Esquina', 'Bodega', 'bodegalaesquina@gmail.com', '14242424545757', 0, 1, '2021-04-10 04:27:19', '2021-03-15 17:03:45', 'perfil.png'),
 (3, 3, 'LG', 'Empresa de electrodomesticos', 'lg@gmail.com', '77565554575', 0, 1, '2021-04-10 04:27:21', '2021-03-15 17:03:45', 'perfil.png'),
 (4, 1, 'Andres', 'Jimenez Quispe', 'andresjq@gmail.com', '1424242657', 0, 1, '2021-04-10 04:27:24', '2021-03-15 17:03:45', 'perfil.png'),
@@ -139,7 +169,7 @@ INSERT INTO `usuario` (`idusuario`, `idnivel`, `nombre`, `apellidos`, `email`, `
 (10, 3, 'A1', 'Abarrotes', 'contacto@a1.com.pe', 'jhko475a1', 0, 1, '2021-04-10 04:27:38', '2021-03-18 18:59:12', 'perfil.png'),
 (11, 2, 'Huerta Grande ', 'Bodega', 'huertagrande@gmail.com', 'huertagrande', 0, 1, '2021-04-10 04:27:41', '2021-03-19 16:58:26', 'perfil.png'),
 (12, 3, 'Epson', 'Impresoras', 'contacto@epson.com.pe', 'epson12345', 0, 1, '2021-04-10 04:27:44', '0000-00-00 00:00:00', 'perfil.png'),
-(13, 1, 'Administrador', 'admin', 'admin@gmail.com', 'admin', 1, 1, '2021-04-20 23:30:21', '0000-00-00 00:00:00', 'circle-cropped (1).png'),
+(13, 6, 'Administrador', 'admin', 'admin@gmail.com', 'admin', 1, 1, '2021-04-22 01:31:54', '0000-00-00 00:00:00', 'circle-cropped (1).png'),
 (14, 1, 'Gustavo', 'Santos', 'gustavograos01@gmail.com', 'parkour123', 0, 1, '2021-04-19 22:16:05', '0000-00-00 00:00:00', 'descarga (2).jpg'),
 (15, 4, 'Gustavo', 'Santos', 'nuevo@gmail.com', '123456789', 1, 1, '2021-04-21 00:10:25', '0000-00-00 00:00:00', 'perfil.png');
 
@@ -186,6 +216,12 @@ ALTER TABLE `niveles`
   ADD PRIMARY KEY (`idnivel`);
 
 --
+-- Indices de la tabla `permisos`
+--
+ALTER TABLE `permisos`
+  ADD PRIMARY KEY (`idpermiso`);
+
+--
 -- Indices de la tabla `personas`
 --
 ALTER TABLE `personas`
@@ -217,7 +253,13 @@ ALTER TABLE `acceso`
 -- AUTO_INCREMENT de la tabla `niveles`
 --
 ALTER TABLE `niveles`
-  MODIFY `idnivel` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idnivel` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT de la tabla `permisos`
+--
+ALTER TABLE `permisos`
+  MODIFY `idpermiso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `personas`
