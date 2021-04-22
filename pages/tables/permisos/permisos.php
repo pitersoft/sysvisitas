@@ -35,61 +35,39 @@
       }
         
     ?>
-    <div class="container-login100" style="background-image: url('img/fondo.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center;width: 360px;margin-left: 30%;">
+    <div class="container-login100" style="width: 360px;margin-left: 30%;">
     <div class="wrap-login100 p-l-20 p-r-30 p-t-10 p-b-30">
        <?php
       include '../../../conf/conexion.php';
       $id=$_GET['id'];
-      $sql="SELECT * FROM usuario INNER JOIN niveles ON usuario.idnivel = niveles.idnivel WHERE idusuario='".$id."'";
+      $sql="SELECT * FROM permisos WHERE idnivel='".$id."'";
       $resultado=mysqli_query($conexion,$sql);
         while ($fila=mysqli_fetch_assoc($resultado)) {
       ?>
       <form action="" method="POST">
-        <div class="h5 bg-success" style="text-align: center;color: #fff;padding: 20px 0px;border-radius: 20px;">Editar Usuario</div>
+        <div class="h5 bg-success" style="text-align: center;color: #fff;padding: 20px 0px;border-radius: 20px;">Permisos</div>
         <div class="mb-3 form-check">
-          <input type="hidden" class="form-control" name="mid"  value="<?php echo $fila['idusuario']; ?>" id="exampleInputNombre2">
+          <input type="hidden" class="form-control" name="mid"  value="<?php echo $fila['idnivel']; ?>" id="exampleInputNombre2">
         </div>
         <div class="mb-3 form-check">
-          <label for="exampleInputNombre2" class="form-label">Nombre</label>
-          <input type="text" class="form-control" name="mnombre" id="exampleInputNombre2"  value="<?php echo $fila['nombre']; ?>">
-        </div>
-        <div class="mb-3 form-check">
-          <label for="exampleInputApellidos2" class="form-label">Apellidos</label>
-          <input type="text" class="form-control" name="mapellidos" id="exampleInputApellidos2"  value="<?php echo $fila['apellidos']; ?>">
-        </div>
-        <div class="mb-3 form-check">
-          <label for="exampleInputNivel2" class="form-label">Nivel</label>
-          <select class="form-select" name="mnivel" id="exampleInputNivel1">
-            <option value="1" <?php echo $fila['idnivel'] == 1 ? 'selected' : ''; ?>> Cliente </option>
-            <option value="2" <?php echo $fila['idnivel'] == 2 ? 'selected' : ''; ?>> Vendedor </option>
-            <option value="3" <?php echo $fila['idnivel'] == 3 ? 'selected' : ''; ?>> Proovedor </option>
-            <option value="4" <?php echo $fila['idnivel'] == 4 ? 'selected' : ''; ?>> Controlador </option>
-            <option value="5" <?php echo $fila['idnivel'] == 5 ? 'selected' : ''; ?>> Supervisor </option>
-            <option value="6" <?php echo $fila['idnivel'] == 6 ? 'selected' : ''; ?>> Administrador </option>
-            <option value="7" <?php echo $fila['idnivel'] == 7 ? 'selected' : ''; ?>> Contador </option>
+          <label for="exampleInputEstado2" class="form-label">Usuarios</label>
+          <select class="form-select" name="musuarios" id="exampleInputEstado1">
+            <option value="0" <?php echo $fila['usuarios'] == 0 ? 'selected' : ''; ?>> Desactivado </option>
+            <option value="1" <?php echo $fila['usuarios'] == 1 ? 'selected' : ''; ?>> Activado </option>
           </select>
         </div>
         <div class="mb-3 form-check">
-          <label for="exampleInputEmail2" class="form-label">Correo</label>
-          <input type="email" class="form-control" name="mcorreo" id="exampleInputEmail2" aria-describedby="emailHelp"  value="<?php echo $fila['email']; ?>">
-        </div>
-        <div class="mb-3 form-check">
-          <label for="exampleInputPassword2" class="form-label">Contraseña</label>
-          <input type="password" class="form-control" name="mcontrasena" id="exampleInputPassword2"  value="<?php echo $fila['password']; ?>">
-        </div>
-        <div class="mb-3 form-check">
-          <label for="exampleInputLogin2" class="form-label">Tipo Login</label>
-          <select class="form-select" name="mlogin" id="exampleInputLogin1">
-            <option value="0" <?php echo $fila['login'] == 0 ? 'selected' : ''; ?>> Usuario </option>
-            <option value="1" <?php echo $fila['login'] == 1 ? 'selected' : ''; ?>> Administrador </option>
-            <option value="2" <?php echo $fila['login'] == 2 ? 'selected' : ''; ?>> Controlador </option>
+          <label for="exampleInputEstado2" class="form-label">Personas</label>
+          <select class="form-select" name="mpersonas" id="exampleInputEstado1">
+            <option value="0" <?php echo $fila['personas'] == 0 ? 'selected' : ''; ?>> Desactivado </option>
+            <option value="1" <?php echo $fila['personas'] == 1 ? 'selected' : ''; ?>> Activado </option>
           </select>
         </div>
         <div class="mb-3 form-check">
-          <label for="exampleInputEstado2" class="form-label">Estado</label>
-          <select class="form-select" name="mestado" id="exampleInputEstado1">
-            <option value="0" <?php echo $fila['estado'] == 0 ? 'selected' : ''; ?>> Deshabilitado </option>
-            <option value="1" <?php echo $fila['estado'] == 1 ? 'selected' : ''; ?>> Habilitado </option>
+          <label for="exampleInputEstado2" class="form-label">Visitas</label>
+          <select class="form-select" name="mvisitas" id="exampleInputEstado1">
+            <option value="0" <?php echo $fila['visitas'] == 0 ? 'selected' : ''; ?>> Desactivado </option>
+            <option value="1" <?php echo $fila['visitas'] == 1 ? 'selected' : ''; ?>> Activado </option>
           </select>
         </div>
         <div class="modal-footer">
@@ -98,25 +76,21 @@
         </div>
         <?php
           $idmu=$_GET['id'];
-          if (isset($_POST['mnombre']) && isset($_POST['mapellidos']) && isset($_POST['mnivel']) && isset($_POST['mcorreo']) && isset($_POST['mcontrasena']) && isset($_POST['mlogin']) && isset($_POST['mestado'])) {
-            $mnombre = $_POST['mnombre'];
-            $mapellidos = $_POST['mapellidos'];
-            if(isset($_POST['mnivel']))
+          if (isset($_POST['musuarios']) && isset($_POST['mpersonas']) && isset($_POST['mvisitas'])) {
+            if(isset($_POST['musuarios']))
             {
-              $mnivel=(int)$_POST['mnivel'];
+              $musuarios=(int)$_POST['musuarios'];
             }
-            $mcorreo = $_POST['mcorreo'];
-            $mcontrasena = $_POST['mcontrasena'];
-            if(isset($_POST['mlogin']))
+            if(isset($_POST['musuarios']))
             {
-              $mlogin=(int)$_POST['mlogin'];
+              $mpersonas=(int)$_POST['mpersonas'];
             }
-            if(isset($_POST['mestado']))
+            if(isset($_POST['mvisitas']))
             {
-              $mestado=(int)$_POST['mestado'];
+              $mvisitas=(int)$_POST['mvisitas'];
             }
             if (isset($_POST['editar'])) {
-              $editar="UPDATE usuario SET idusuario= '$idmu',idnivel='$mnivel',nombre='$mnombre',apellidos='$mapellidos',email='$mcorreo',password='$mcontrasena',login='$mlogin',estado='$mestado' WHERE idusuario='$idmu'";
+              $editar="UPDATE permisos SET idnivel= '$idmu',usuarios='$musuarios',personas='$mpersonas',visitas='$mvisitas' WHERE idnivel='$idmu'";
               $resultadonuevo=mysqli_query($conexion,$editar);
               $respuestanuevo="Se ha modificadoado usuario.";
               echo $respuestanuevo;

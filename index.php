@@ -205,7 +205,7 @@ if(!isset($usuario)){
       <!-- Sidebar user panel (optional) -->
        <?php
           include 'conf/conexion.php';
-          $sell= "SELECT * FROM usuario WHERE email='$usuario'";
+          $sell= "SELECT * FROM usuario INNER JOIN niveles ON usuario.idnivel = niveles.idnivel WHERE email='$usuario'";
           $query=mysqli_query($conexion,$sell);
           while($datos2 = mysqli_fetch_array($query))
           {
@@ -215,7 +215,7 @@ if(!isset($usuario)){
           <img style="width: 60px;height: 60px;border-radius: 100%;background-color: #fff;" src="imgperfil/<?php echo ($datos2['perfil']); ?>" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a class="d-block" style="text-decoration: none;"><?php echo $datos2['nombre']."<br>".$datos2['apellidos']; ?></a>
+          <a class="d-block" style="text-decoration: none;"><?php echo $datos2['nombre']."<br>".$datos2['nivel']; ?></a>
         </div>
       </div>
       <?php 
@@ -304,6 +304,59 @@ if(!isset($usuario)){
                 <a href="pages/tables/visitas" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Visitas</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="pages/tables/permisos" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Permisos</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-book"></i>
+              <p>
+                Opciones
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Opción 1</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Opción 2</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Opción 3</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Opción 4</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Opción 5</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Opción 6</p>
                 </a>
               </li>
             </ul>
