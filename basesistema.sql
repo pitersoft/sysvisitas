@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-04-2021 a las 03:41:13
+-- Tiempo de generación: 23-04-2021 a las 02:27:04
 -- Versión del servidor: 10.4.18-MariaDB
 -- Versión de PHP: 8.0.3
 
@@ -90,21 +90,22 @@ CREATE TABLE `permisos` (
   `idnivel` int(11) NOT NULL,
   `usuarios` int(11) NOT NULL,
   `personas` int(11) NOT NULL,
-  `visitas` int(11) NOT NULL
+  `visitas` int(11) NOT NULL,
+  `permisos` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `permisos`
 --
 
-INSERT INTO `permisos` (`idpermiso`, `idnivel`, `usuarios`, `personas`, `visitas`) VALUES
-(1, 1, 0, 0, 0),
-(2, 2, 0, 0, 0),
-(3, 3, 0, 0, 0),
-(4, 4, 0, 0, 1),
-(5, 6, 0, 0, 0),
-(6, 7, 0, 0, 0),
-(7, 5, 0, 0, 0);
+INSERT INTO `permisos` (`idpermiso`, `idnivel`, `usuarios`, `personas`, `visitas`, `permisos`) VALUES
+(1, 1, 1, 1, 0, 0),
+(2, 2, 0, 0, 0, 0),
+(3, 3, 0, 0, 0, 0),
+(4, 4, 0, 0, 1, 0),
+(5, 6, 1, 1, 1, 1),
+(6, 7, 0, 0, 0, 0),
+(7, 5, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -146,7 +147,7 @@ CREATE TABLE `usuario` (
   `email` varchar(30) NOT NULL,
   `password` varchar(18) NOT NULL,
   `login` int(1) NOT NULL,
-  `estado` tinyint(1) NOT NULL,
+  `estado` int(1) NOT NULL,
   `fecha_creacion` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `fecha_comunicacion` datetime NOT NULL,
   `perfil` varchar(100) NOT NULL
@@ -157,9 +158,9 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`idusuario`, `idnivel`, `nombre`, `apellidos`, `email`, `password`, `login`, `estado`, `fecha_creacion`, `fecha_comunicacion`, `perfil`) VALUES
-(1, 6, 'Gustavo Rivaldo', 'Graos Santos', 'grgs95859@gmail.com', '123456', 1, 1, '2021-04-22 01:31:24', '2021-03-15 17:03:45', 'myAvatar.png'),
-(2, 2, ' La Esquina', 'Bodega', 'bodegalaesquina@gmail.com', '14242424545757', 0, 1, '2021-04-10 04:27:19', '2021-03-15 17:03:45', 'perfil.png'),
-(3, 3, 'LG', 'Empresa de electrodomesticos', 'lg@gmail.com', '77565554575', 0, 1, '2021-04-10 04:27:21', '2021-03-15 17:03:45', 'perfil.png'),
+(1, 6, 'Gustavo Rivaldo', 'Graos Santos', 'grgs95859@gmail.com', '123456', 1, 1, '2021-04-22 22:02:30', '2021-03-15 17:03:45', 'myAvatar.png'),
+(2, 2, ' La Esquina', 'Bodega', 'bodegalaesquina@gmail.com', '14242424545757', 0, 1, '2021-04-22 23:23:31', '2021-03-15 17:03:45', 'perfil.png'),
+(3, 3, 'LG', 'Empresa de electrodomesticos', 'lg@gmail.com', '77565554575', 0, 1, '2021-04-22 22:04:04', '2021-03-15 17:03:45', 'perfil.png'),
 (4, 1, 'Andres', 'Jimenez Quispe', 'andresjq@gmail.com', '1424242657', 0, 1, '2021-04-10 04:27:24', '2021-03-15 17:03:45', 'perfil.png'),
 (5, 2, 'EL Comercio', 'Bodega', 'el comercio@gmail.com', '1424242545', 0, 1, '2021-04-10 04:27:26', '2021-03-15 17:03:45', 'perfil.png'),
 (6, 3, 'Doña Gumi', 'Abarrotes', 'contacto@doñagumi.com.pe', '142424242142', 0, 1, '2021-04-10 04:27:28', '2021-03-15 17:03:45', 'perfil.png'),
@@ -170,8 +171,10 @@ INSERT INTO `usuario` (`idusuario`, `idnivel`, `nombre`, `apellidos`, `email`, `
 (11, 2, 'Huerta Grande ', 'Bodega', 'huertagrande@gmail.com', 'huertagrande', 0, 1, '2021-04-10 04:27:41', '2021-03-19 16:58:26', 'perfil.png'),
 (12, 3, 'Epson', 'Impresoras', 'contacto@epson.com.pe', 'epson12345', 0, 1, '2021-04-10 04:27:44', '0000-00-00 00:00:00', 'perfil.png'),
 (13, 6, 'Administrador', 'admin', 'admin@gmail.com', 'admin', 1, 1, '2021-04-22 01:31:54', '0000-00-00 00:00:00', 'circle-cropped (1).png'),
-(14, 1, 'Gustavo', 'Santos', 'gustavograos01@gmail.com', 'parkour123', 0, 1, '2021-04-19 22:16:05', '0000-00-00 00:00:00', 'descarga (2).jpg'),
-(15, 4, 'Gustavo', 'Santos', 'nuevo@gmail.com', '123456789', 1, 1, '2021-04-21 00:10:25', '0000-00-00 00:00:00', 'perfil.png');
+(14, 1, 'Gustavo', 'Santos', 'gustavograos01@gmail.com', 'parkour123', 0, 1, '2021-04-22 21:31:35', '0000-00-00 00:00:00', 'descarga (2).jpg'),
+(15, 4, 'Gustavo', 'Santos', 'controlador@gmail.com', 'controlador', 1, 1, '2021-04-22 21:19:12', '0000-00-00 00:00:00', 'perfil.png'),
+(16, 5, 'Supervisor', 'Supervisor', 'supervisor@gmail.com', 'supervisor', 0, 1, '2021-04-22 21:21:37', '0000-00-00 00:00:00', 'perfil.png'),
+(17, 7, 'Contador', 'Contador', 'contador@gmail.com', 'contador', 0, 1, '2021-04-22 21:23:05', '0000-00-00 00:00:00', 'perfil.png');
 
 -- --------------------------------------------------------
 
@@ -271,7 +274,7 @@ ALTER TABLE `personas`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `idusuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `idusuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `visitas`
