@@ -82,7 +82,6 @@
           <select class="form-select" name="mlogin" id="exampleInputLogin1">
             <option value="0" <?php echo $fila['login'] == 0 ? 'selected' : ''; ?>> Usuario </option>
             <option value="1" <?php echo $fila['login'] == 1 ? 'selected' : ''; ?>> Administrador </option>
-            <option value="2" <?php echo $fila['login'] == 2 ? 'selected' : ''; ?>> Controlador </option>
           </select>
         </div>
         <div class="mb-3 form-check">

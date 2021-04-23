@@ -70,6 +70,13 @@
             <option value="1" <?php echo $fila['visitas'] == 1 ? 'selected' : ''; ?>> Activado </option>
           </select>
         </div>
+        <div class="mb-3 form-check">
+          <label for="exampleInputEstado2" class="form-label">Permisos</label>
+          <select class="form-select" name="mpermisos" id="exampleInputEstado1">
+            <option value="0" <?php echo $fila['permisos'] == 0 ? 'selected' : ''; ?>> Desactivado </option>
+            <option value="1" <?php echo $fila['permisos'] == 1 ? 'selected' : ''; ?>> Activado </option>
+          </select>
+        </div>
         <div class="modal-footer">
           <a href="index.php" class="btn btn-secondary">Cancelar</a>
           <input type="submit" class="btn btn-primary" name="editar" value="Guardar">
@@ -89,8 +96,12 @@
             {
               $mvisitas=(int)$_POST['mvisitas'];
             }
+            if(isset($_POST['mpermisos']))
+            {
+              $mpermisos=(int)$_POST['mpermisos'];
+            }
             if (isset($_POST['editar'])) {
-              $editar="UPDATE permisos SET idnivel= '$idmu',usuarios='$musuarios',personas='$mpersonas',visitas='$mvisitas' WHERE idnivel='$idmu'";
+              $editar="UPDATE permisos SET idnivel= '$idmu',usuarios='$musuarios',personas='$mpersonas',visitas='$mvisitas',permisos='$mpermisos' WHERE idnivel='$idmu'";
               $resultadonuevo=mysqli_query($conexion,$editar);
               $respuestanuevo="Se ha modificadoado usuario.";
               echo $respuestanuevo;

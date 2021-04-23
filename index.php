@@ -268,6 +268,15 @@ if(!isset($usuario)){
               </li>
             </ul>
           </li>
+          <?php
+                 $sellac= "SELECT * FROM usuario INNER JOIN permisos ON usuario.idnivel = permisos.idnivel WHERE email='$usuario'";
+                $queryac=mysqli_query($conexion,$sellac);
+                while($acceso = mysqli_fetch_array($queryac))
+                {
+          ?>
+          <?php
+          if ($acceso['usuarios']==1) {
+          ?>
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
@@ -277,14 +286,44 @@ if(!isset($usuario)){
               </p>
             </a>
             <ul class="nav nav-treeview">
+              <?php
+                $sellac= "SELECT * FROM usuario INNER JOIN permisos ON usuario.idnivel = permisos.idnivel WHERE email='$usuario'";
+                $queryac=mysqli_query($conexion,$sellac);
+                while($acceso2 = mysqli_fetch_array($queryac))
+                {
+              ?>
+              <?php
+              if ($acceso2['usuarios']==1) {
+              ?>
               <li class="nav-item">
                 <a href="pages/forms/usuarios" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Usuarios</p>
                 </a>
               </li>
+              <?php 
+                }
+              ?>
+              <?php
+              }
+              ?>
             </ul>
           </li>
+          <?php 
+              }
+          ?>
+          <?php
+            }
+          ?>
+          <?php
+                 $sellac= "SELECT * FROM usuario INNER JOIN permisos ON usuario.idnivel = permisos.idnivel WHERE email='$usuario'";
+                $queryac=mysqli_query($conexion,$sellac);
+                while($acceso3 = mysqli_fetch_array($queryac))
+                {
+          ?>
+          <?php
+          if ($acceso3['personas']==1 || $acceso3['visitas'] || $acceso3['permisos']) {
+          ?>
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-table"></i>
@@ -294,26 +333,59 @@ if(!isset($usuario)){
               </p>
             </a>
             <ul class="nav nav-treeview">
+              <?php
+                     $sellac= "SELECT * FROM usuario INNER JOIN permisos ON usuario.idnivel = permisos.idnivel WHERE email='$usuario'";
+                    $queryac=mysqli_query($conexion,$sellac);
+                    while($acceso1 = mysqli_fetch_array($queryac))
+                    {
+              ?>
+              <?php
+              if ($acceso1['personas']==1) {
+              ?>
               <li class="nav-item">
                 <a href="pages/tables/personas" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Personas</p>
                 </a>
               </li>
+              <?php 
+                }
+              ?>
+              <?php
+              if ($acceso1['visitas']==1) {
+              ?>
               <li class="nav-item">
                 <a href="pages/tables/visitas" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Visitas</p>
                 </a>
               </li>
+              <?php 
+                }
+              ?>
+              <?php
+              if ($acceso1['permisos']==1) {
+              ?>
               <li class="nav-item">
                 <a href="pages/tables/permisos" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Permisos</p>
                 </a>
               </li>
+              <?php 
+                }
+              ?>
+              <?php
+              }
+              ?>
             </ul>
           </li>
+          <?php 
+              }
+          ?>
+          <?php
+            }
+          ?>
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-book"></i>

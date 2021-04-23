@@ -50,7 +50,7 @@
 			$usuarioad = $_POST['usuarioad'];
 			$clavead = $_POST['contrasenaad'];
 
-			$q = "SELECT COUNT(*) FROM usuario where email = '$usuarioad' and password = '$clavead'";
+			$q = "SELECT COUNT(*) FROM usuario where email = '$usuarioad' and password = '$clavead' and estado = 1";
 			$consulta = mysqli_query($conexion,$q);
 			$array = mysqli_fetch_array($consulta);
 
@@ -58,7 +58,7 @@
 				$_SESSION['username'] = $usuarioad;
 				header("location: index.php");
 			}else{
-				echo "Usted no es Administrador";
+				echo "Contraseña Incorrecta"."<br>"."o"."<br>"."Su cuenta fue desactivada";
 			}
 
 			?>

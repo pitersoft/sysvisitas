@@ -1,3 +1,4 @@
+  
 <?php  
 
 session_start();
@@ -89,7 +90,6 @@ if(!isset($usuario)){
 			                  <select class="form-select" name="nlogin" id="exampleInputLogin1">
 			                    <option value="0"> Usuario </option>
 			                    <option value="1"> Administrador </option>
-			                    <option value="2"> Controlador </option>
 			                  </select>
 			                </div>
 			                <div class="mb-3 form-check">
@@ -117,7 +117,6 @@ if(!isset($usuario)){
 				            <th scope="col">APELLIDOS</th>
 				            <th scope="col">NIVEL</th>
 				            <th scope="col">CORREO</th>
-				            <th scope="col">LOGIN</th>
 				            <th scope="col">ESTADO</th>
 				            <?php
 				             $sellac= "SELECT * FROM usuario WHERE email='$usuario'";
@@ -147,15 +146,8 @@ if(!isset($usuario)){
 				            <td><?php echo $row['apellidos']; ?></td>
 				            <td><?php echo $row['nivel']; ?></td>
 				            <td><?php echo $row['email']; ?></td>
-				            <td><?php $es=$row['login'];
-				                if ($es==1){
-				                echo "Administrador";
-				                }elseif ($es==0){
-				                echo "Usuario";
-				                } ?>
-				            </td>
 				            <td><?php $es=$row['estado'];
-				                if ($es!=true){
+				                if ($es==1){
 				                echo "Habilitado";
 				                }else{
 				                echo "Deshabilitado";
