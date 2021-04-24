@@ -57,24 +57,31 @@
           </select>
         </div>
         <div class="mb-3 form-check">
-          <label for="exampleInputEstado2" class="form-label">Personas</label>
+          <label for="exampleInputEstado2" class="form-label">Tabla Personas</label>
           <select class="form-select" name="mpersonas" id="exampleInputEstado1">
             <option value="0" <?php echo $fila['personas'] == 0 ? 'selected' : ''; ?>> Desactivado </option>
             <option value="1" <?php echo $fila['personas'] == 1 ? 'selected' : ''; ?>> Activado </option>
           </select>
         </div>
         <div class="mb-3 form-check">
-          <label for="exampleInputEstado2" class="form-label">Visitas</label>
+          <label for="exampleInputEstado2" class="form-label">Tabla Permisos</label>
+          <select class="form-select" name="mpermisos" id="exampleInputEstado1">
+            <option value="0" <?php echo $fila['permisos'] == 0 ? 'selected' : ''; ?>> Desactivado </option>
+            <option value="1" <?php echo $fila['permisos'] == 1 ? 'selected' : ''; ?>> Activado </option>
+          </select>
+        </div>
+        <div class="mb-3 form-check">
+          <label for="exampleInputEstado2" class="form-label">Reporte Visitas</label>
           <select class="form-select" name="mvisitas" id="exampleInputEstado1">
             <option value="0" <?php echo $fila['visitas'] == 0 ? 'selected' : ''; ?>> Desactivado </option>
             <option value="1" <?php echo $fila['visitas'] == 1 ? 'selected' : ''; ?>> Activado </option>
           </select>
         </div>
         <div class="mb-3 form-check">
-          <label for="exampleInputEstado2" class="form-label">Permisos</label>
-          <select class="form-select" name="mpermisos" id="exampleInputEstado1">
-            <option value="0" <?php echo $fila['permisos'] == 0 ? 'selected' : ''; ?>> Desactivado </option>
-            <option value="1" <?php echo $fila['permisos'] == 1 ? 'selected' : ''; ?>> Activado </option>
+          <label for="exampleInputEstado2" class="form-label">Reporte Permisos</label>
+          <select class="form-select" name="mreportepermisos" id="exampleInputEstado1">
+            <option value="0" <?php echo $fila['reporte_permisos'] == 0 ? 'selected' : ''; ?>> Desactivado </option>
+            <option value="1" <?php echo $fila['reporte_permisos'] == 1 ? 'selected' : ''; ?>> Activado </option>
           </select>
         </div>
         <div class="modal-footer">
@@ -83,7 +90,7 @@
         </div>
         <?php
           $idmu=$_GET['id'];
-          if (isset($_POST['musuarios']) && isset($_POST['mpersonas']) && isset($_POST['mvisitas'])) {
+          if (isset($_POST['musuarios']) && isset($_POST['mpersonas']) && isset($_POST['mvisitas']) && isset($_POST['mreportepermisos'])) {
             if(isset($_POST['musuarios']))
             {
               $musuarios=(int)$_POST['musuarios'];
@@ -100,8 +107,12 @@
             {
               $mpermisos=(int)$_POST['mpermisos'];
             }
+            if(isset($_POST['mreportepermisos']))
+            {
+              $mreportepermisos=(int)$_POST['mreportepermisos'];
+            }
             if (isset($_POST['editar'])) {
-              $editar="UPDATE permisos SET idnivel= '$idmu',usuarios='$musuarios',personas='$mpersonas',visitas='$mvisitas',permisos='$mpermisos' WHERE idnivel='$idmu'";
+              $editar="UPDATE permisos SET idnivel= '$idmu',usuarios='$musuarios',personas='$mpersonas',visitas='$mvisitas',permisos='$mpermisos,reporte_permisos='$mreportepermisos' WHERE idnivel='$idmu'";
               $resultadonuevo=mysqli_query($conexion,$editar);
               $respuestanuevo="Se ha modificadoado usuario.";
               echo $respuestanuevo;

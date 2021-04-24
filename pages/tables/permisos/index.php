@@ -43,7 +43,7 @@ if(!isset($usuario)){
 			    <?php  
 			    	}
 				?>
-				<h4 class="text-center text-dark pt-2">Personas</h4>
+				<h4 class="text-center text-dark pt-2">Permisos</h4>
 			    <div style="width: 100%;">
 				<div style="width: 100%;display: flex;flex-direction: row;justify-content: space-around;"> 	
 				

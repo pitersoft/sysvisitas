@@ -322,7 +322,7 @@ if(!isset($usuario)){
                 {
           ?>
           <?php
-          if ($acceso3['personas']==1 || $acceso3['visitas'] || $acceso3['permisos']) {
+          if ($acceso3['personas']==1 || $acceso3['permisos']) {
           ?>
           <li class="nav-item">
             <a href="#" class="nav-link">
@@ -352,10 +352,57 @@ if(!isset($usuario)){
                 }
               ?>
               <?php
-              if ($acceso1['visitas']==1) {
+              if ($acceso1['permisos']==1) {
               ?>
               <li class="nav-item">
-                <a href="pages/tables/visitas" class="nav-link">
+                <a href="pages/tables/permisos" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Permisos</p>
+                </a>
+              </li>
+              <?php 
+                }
+              ?>
+              <?php
+              }
+              ?>
+            </ul>
+          </li>
+          <?php 
+              }
+          ?>
+          <?php
+            }
+          ?>
+          <?php
+                 $sellac= "SELECT * FROM usuario INNER JOIN permisos ON usuario.idnivel = permisos.idnivel WHERE email='$usuario'";
+                $queryac=mysqli_query($conexion,$sellac);
+                while($acceso5 = mysqli_fetch_array($queryac))
+                {
+          ?>
+          <?php
+          if ($acceso5['visitas'] || $acceso5['reporte_permisos']) {
+          ?>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-table"></i>
+              <p>
+                Reporte
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <?php
+                     $sellac= "SELECT * FROM usuario INNER JOIN permisos ON usuario.idnivel = permisos.idnivel WHERE email='$usuario'";
+                    $queryac=mysqli_query($conexion,$sellac);
+                    while($acceso6 = mysqli_fetch_array($queryac))
+                    {
+              ?>
+              <?php
+              if ($acceso6['visitas']==1) {
+              ?>
+              <li class="nav-item">
+                <a href="pages/reportes/visitas" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Visitas</p>
                 </a>
@@ -364,10 +411,10 @@ if(!isset($usuario)){
                 }
               ?>
               <?php
-              if ($acceso1['permisos']==1) {
+              if ($acceso6['reporte_permisos']==1) {
               ?>
               <li class="nav-item">
-                <a href="pages/tables/permisos" class="nav-link">
+                <a href="pages/reportes/reportepermisos" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Permisos</p>
                 </a>

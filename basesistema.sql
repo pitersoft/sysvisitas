@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-04-2021 a las 02:27:04
+-- Tiempo de generación: 24-04-2021 a las 02:37:22
 -- Versión del servidor: 10.4.18-MariaDB
 -- Versión de PHP: 8.0.3
 
@@ -91,21 +91,22 @@ CREATE TABLE `permisos` (
   `usuarios` int(11) NOT NULL,
   `personas` int(11) NOT NULL,
   `visitas` int(11) NOT NULL,
-  `permisos` int(11) NOT NULL
+  `permisos` int(11) NOT NULL,
+  `reporte_permisos` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `permisos`
 --
 
-INSERT INTO `permisos` (`idpermiso`, `idnivel`, `usuarios`, `personas`, `visitas`, `permisos`) VALUES
-(1, 1, 1, 1, 0, 0),
-(2, 2, 0, 0, 0, 0),
-(3, 3, 0, 0, 0, 0),
-(4, 4, 0, 0, 1, 0),
-(5, 6, 1, 1, 1, 1),
-(6, 7, 0, 0, 0, 0),
-(7, 5, 0, 0, 0, 0);
+INSERT INTO `permisos` (`idpermiso`, `idnivel`, `usuarios`, `personas`, `visitas`, `permisos`, `reporte_permisos`) VALUES
+(1, 1, 0, 0, 0, 0, 0),
+(2, 2, 0, 0, 0, 0, 0),
+(3, 3, 0, 0, 0, 0, 0),
+(4, 4, 0, 0, 1, 0, 0),
+(5, 6, 1, 1, 1, 1, 1),
+(6, 7, 0, 0, 0, 0, 0),
+(7, 5, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
