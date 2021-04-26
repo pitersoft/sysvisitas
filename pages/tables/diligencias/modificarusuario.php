@@ -35,61 +35,61 @@
       }
         
     ?>
-    <div class="container-login100" style="width: 360px;margin-left: 30%;">
+    <div class="container-login100" style="background-image: url('img/fondo.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center;width: 360px;margin-left: 30%;">
     <div class="wrap-login100 p-l-20 p-r-30 p-t-10 p-b-30">
        <?php
       include '../../../conf/conexion.php';
       $id=$_GET['id'];
-      $sql="SELECT * FROM permisos WHERE idnivel='".$id."'";
+      $sql="SELECT * FROM diligencias INNER JOIN usuario ON diligencias.idusuario = usuario.idusuario WHERE id_diligencia='".$id."'";
       $resultado=mysqli_query($conexion,$sql);
         while ($fila=mysqli_fetch_assoc($resultado)) {
       ?>
       <form action="" method="POST">
-        <div class="h5 bg-success" style="text-align: center;color: #fff;padding: 20px 0px;border-radius: 20px;">Permisos</div>
+        <div class="h5 bg-success" style="text-align: center;color: #fff;padding: 20px 0px;border-radius: 20px;">Editar Usuario</div>
         <div class="mb-3 form-check">
-          <input type="hidden" class="form-control" name="mid"  value="<?php echo $fila['idnivel']; ?>" id="exampleInputNombre2">
+          <input type="hidden" class="form-control" name="mid"  value="<?php echo $fila['idusuario']; ?>" id="exampleInputNombre2">
         </div>
         <div class="mb-3 form-check">
-          <label for="exampleInputEstado2" class="form-label">Usuarios</label>
-          <select class="form-select" name="musuarios" id="exampleInputEstado1">
-            <option value="0" <?php echo $fila['usuarios'] == 0 ? 'selected' : ''; ?>> Desactivado </option>
-            <option value="1" <?php echo $fila['usuarios'] == 1 ? 'selected' : ''; ?>> Activado </option>
+          <label for="InputUsuario" class="form-label">Usuario</label>
+          <select class="form-select" name="musuario" id="InputUsuario">
+            <?php 
+                $query=mysqli_query($conexion,"SELECT * FROM usuario");
+                while($nivel = mysqli_fetch_array($query))
+                {
+            ?>
+                    <option value="<?php echo $nivel['idusuario']?>" <?php echo $fila['idusuario'] == $nivel['idusuario'] ? 'selected' : ''; ?>> <?php echo $nivel['nombre']." ".$nivel['apellidos']?> </option>
+            <?php
+                }
+            ?> 
           </select>
         </div>
         <div class="mb-3 form-check">
-          <label for="exampleInputEstado2" class="form-label">Tabla Personas</label>
-          <select class="form-select" name="mpersonas" id="exampleInputEstado1">
-            <option value="0" <?php echo $fila['personas'] == 0 ? 'selected' : ''; ?>> Desactivado </option>
-            <option value="1" <?php echo $fila['personas'] == 1 ? 'selected' : ''; ?>> Activado </option>
+          <label for="InputFechahoraIngreso" class="form-label">Fecha y hora de Ingreso</label>
+          <input type="datetime-local" class="form-control" value="<?php echo (date ('Y-m-d\TH:i:s', strtotime($fila['fecha_hora_ingreso']))); ?>" name="mfhingreso" id="InputFechahoraIngreso">
+        </div>
+
+        <div class="mb-3 form-check">
+          <label for="InputMotivo" class="form-label">Motivo</label>
+          <input type="text" class="form-control" name="mmotivo" id="InputMotivo" value="<?php echo $fila['motivo'];?>">
+        </div>
+        <div class="mb-3 form-check">
+          <label for="InputTiempo" class="form-label">Tiempo</label>
+          <input type="time" class="form-control" name="mtiempo" id="InputTiempo" value="<?php echo $fila['tiempo'];?>">
+        </div>
+        <div class="mb-3 form-check">
+          <label for="InputFechahoraRetorno" class="form-label">Fecha y hora de Retorno</label>
+          <input type="datetime-local" class="form-control" name="mfhretorno" id="InputFechahoraRetorno" value="<?php echo (date ('Y-m-d\TH:i:s', strtotime($fila['fecha_hora_retorno']))); ?>">
+        </div>
+        <div class="mb-3 form-check">
+          <label for="exampleInputEstado2" class="form-label">Estado</label>
+          <select class="form-select" name="mestado" id="exampleInputEstado1">
+            <option value="0" <?php echo $fila['estado'] == 0 ? 'selected' : ''; ?>> Deshabilitado </option>
+            <option value="1" <?php echo $fila['estado'] == 1 ? 'selected' : ''; ?>> Habilitado </option>
           </select>
         </div>
         <div class="mb-3 form-check">
-          <label for="exampleInputEstado2" class="form-label">Tabla Permisos</label>
-          <select class="form-select" name="mpermisos" id="exampleInputEstado1">
-            <option value="0" <?php echo $fila['permisos'] == 0 ? 'selected' : ''; ?>> Desactivado </option>
-            <option value="1" <?php echo $fila['permisos'] == 1 ? 'selected' : ''; ?>> Activado </option>
-          </select>
-        </div>
-        <div class="mb-3 form-check">
-          <label for="exampleInputEstado2" class="form-label">Tabla Diligencias</label>
-          <select class="form-select" name="mdiligencias" id="exampleInputEstado1">
-            <option value="0" <?php echo $fila['diligencias'] == 0 ? 'selected' : ''; ?>> Desactivado </option>
-            <option value="1" <?php echo $fila['diligencias'] == 1 ? 'selected' : ''; ?>> Activado </option>
-          </select>
-        </div>
-        <div class="mb-3 form-check">
-          <label for="exampleInputEstado2" class="form-label">Reporte Visitas</label>
-          <select class="form-select" name="mvisitas" id="exampleInputEstado1">
-            <option value="0" <?php echo $fila['visitas'] == 0 ? 'selected' : ''; ?>> Desactivado </option>
-            <option value="1" <?php echo $fila['visitas'] == 1 ? 'selected' : ''; ?>> Activado </option>
-          </select>
-        </div>
-        <div class="mb-3 form-check">
-          <label for="exampleInputEstado2" class="form-label">Reporte Permisos</label>
-          <select class="form-select" name="mreportepermisos" id="exampleInputEstado1">
-            <option value="0" <?php echo $fila['reporte_permisos'] == 0 ? 'selected' : ''; ?>> Desactivado </option>
-            <option value="1" <?php echo $fila['reporte_permisos'] == 1 ? 'selected' : ''; ?>> Activado </option>
-          </select>
+          <label for="InputDescripción" class="form-label">Descripción</label>
+          <textarea class="form-control" name="mdescripcion" id="InputDescripción"><?php echo $fila['descripcion'];?></textarea>
         </div>
         <div class="modal-footer">
           <a href="index.php" class="btn btn-secondary">Cancelar</a>
@@ -97,33 +97,20 @@
         </div>
         <?php
           $idmu=$_GET['id'];
-          if (isset($_POST['musuarios']) && isset($_POST['mpersonas']) && isset($_POST['mvisitas']) && isset($_POST['mreportepermisos']) && isset($_POST['mdiligencias'])) {
-            if(isset($_POST['musuarios']))
+          if (isset($_POST['musuario']) && isset($_POST['mfhingreso']) && isset($_POST['mmotivo']) && isset($_POST['mtiempo']) && isset($_POST['mfhretorno']) && isset($_POST['mestado']) && isset($_POST['mdescripcion'])) {
+            $musuario = $_POST['musuario'];
+            $mfhingreso = $_POST['mfhingreso'];
+            $mmotivo = $_POST['mmotivo'];
+            $mtiempo = $_POST['mtiempo'];
+            $mfhretorno = $_POST['mfhretorno'];
+            if(isset($_POST['mestado']))
             {
-              $musuarios=(int)$_POST['musuarios'];
+              $mestado=(int)$_POST['mestado'];
             }
-            if(isset($_POST['musuarios']))
-            {
-              $mpersonas=(int)$_POST['mpersonas'];
-            }
-            if(isset($_POST['mvisitas']))
-            {
-              $mvisitas=(int)$_POST['mvisitas'];
-            }
-            if(isset($_POST['mpermisos']))
-            {
-              $mpermisos=(int)$_POST['mpermisos'];
-            }
-            if(isset($_POST['mdiligencias']))
-            {
-              $mdiligencias=(int)$_POST['mdiligencias'];
-            }
-            if(isset($_POST['mreportepermisos']))
-            {
-              $mreportepermisos=(int)$_POST['mreportepermisos'];
-            }
+            $mdescripcion = $_POST['mdescripcion'];
             if (isset($_POST['editar'])) {
-              $editar="UPDATE permisos SET idnivel= '$idmu',usuarios='$musuarios',personas='$mpersonas',visitas='$mvisitas',permisos='$mpermisos,reporte_permisos='$mreportepermisos',diligencias='$mdiligencias' WHERE idnivel='$idmu'";
+              $editar="UPDATE diligencias SET idusuario='$musuario',fecha_hora_ingreso='$mfhingreso',motivo='$mmotivo',tiempo='$mtiempo',fecha_hora_retorno='mfhretorno',estado='$mestado',descripcion='$mdescripcion' WHERE id_diligencia='$idmu'";
+
               $resultadonuevo=mysqli_query($conexion,$editar);
               $respuestanuevo="Se ha modificadoado usuario.";
               echo $respuestanuevo;

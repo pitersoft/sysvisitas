@@ -33,9 +33,9 @@ if(!isset($usuario)){
 		?>
 		<div class="row justify-content-center" style="width: 100%;">
 			<div class=" bg-light rounded my-2 mx-2 ml-1" style="width: 98%;padding: 20px 0px 20px 30px;">
-				<h4 class="text-center text-dark pt-2">Registro de Usuarios</h4>
+				<h4 class="text-center text-dark pt-2">Registro de Diligencias</h4>
 				<?php
-				if ($acceso['nivel']=="Administrador") {
+				if ($acceso['login']==1) {
 					echo '<button type="button" class="btn btn-success col-1" data-bs-toggle="modal" data-bs-target="#exampleModal">
 			       Nuevo
 			    </button>';
@@ -50,47 +50,41 @@ if(!isset($usuario)){
 			        <div class="modal-dialog">
 			          <div class="modal-content">
 			            <div class="modal-header">
-			              <h5 class="modal-title" id="exampleModalLabel">Nuevo Usuario</h5>
+			              <h5 class="modal-title" id="exampleModalLabel">Nueva Diligencia</h5>
 			              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			            </div>
 			            <form action="agregarusuario.php" method="POST">
 			              <div class="modal-body">
 			                <div class="mb-3 form-check">
-			                  <label for="exampleInputNombre1" class="form-label">Nombre</label>
-			                  <input type="text" class="form-control" name="nnombre" id="exampleInputNombre1">
-			                </div>
-			                <div class="mb-3 form-check">
-			                  <label for="exampleInputApellidos1" class="form-label">Apellidos</label>
-			                  <input type="text" class="form-control" name="napellidos" id="exampleInputApellidos1">
-			                </div>
-			                <div class="mb-3 form-check">
-			                  <label for="exampleInputNivel1" class="form-label">Nivel</label>
-			                  <select class="form-select" name="nnivel" id="exampleInputNivel1">
+			                  <label for="InputUsuario" class="form-label">Usuario</label>
+			                  <select class="form-select" name="nusuario" id="InputUsuario">
 			                    <?php 
-			                        $query=mysqli_query($conexion,"SELECT * FROM niveles");
+			                        $query=mysqli_query($conexion,"SELECT * FROM usuario");
 			                        while($nivel = mysqli_fetch_array($query))
 			                        {
 			                    ?>
-			                            <option value="<?php echo $nivel['idnivel']?>"> <?php echo $nivel['nivel']?> </option>
+			                            <option value="<?php echo $nivel['idusuario']?>"> <?php echo $nivel['nombre']." ".$nivel['apellidos']?> </option>
 			                    <?php
 			                        }
 			                    ?> 
 			                  </select>
 			                </div>
 			                <div class="mb-3 form-check">
-			                  <label for="exampleInputEmail1" class="form-label">Correo</label>
-			                  <input type="email" class="form-control" name="ncorreo" id="exampleInputEmail1" aria-describedby="emailHelp">
+			                  <label for="InputFechahoraIngreso" class="form-label">Fecha y hora de Ingreso</label>
+			                  <input type="datetime-local" class="form-control" name="nfhingreso" id="InputFechahoraIngreso">
+			                </div>
+
+			                <div class="mb-3 form-check">
+			                  <label for="InputMotivo" class="form-label">Motivo</label>
+			                  <input type="text" class="form-control" name="nmotivo" id="InputMotivo">
 			                </div>
 			                <div class="mb-3 form-check">
-			                  <label for="exampleInputPassword1" class="form-label">Contraseña</label>
-			                  <input type="password" class="form-control" name="ncontrasena" id="exampleInputPassword1">
+			                  <label for="InputTiempo" class="form-label">Tiempo</label>
+			                  <input type="time" class="form-control" name="ntiempo" id="InputTiempo" aria-describedby="emailHelp">
 			                </div>
 			                <div class="mb-3 form-check">
-			                  <label for="exampleInputLogin1" class="form-label">Tipo Login</label>
-			                  <select class="form-select" name="nlogin" id="exampleInputLogin1">
-			                    <option value="0"> Usuario </option>
-			                    <option value="1"> Administrador </option>
-			                  </select>
+			                  <label for="InputFechahoraRetorno" class="form-label">Fecha y hora de Retorno</label>
+			                  <input type="datetime-local" class="form-control" name="nfhretorno" id="InputFechahoraRetorno">
 			                </div>
 			                <div class="mb-3 form-check">
 			                  <label for="exampleInputEstado1" class="form-label">Estado</label>
@@ -98,6 +92,10 @@ if(!isset($usuario)){
 			                    <option value="0"> Deshabilitado </option>
 			                    <option value="1"> Habilitado </option>
 			                  </select>
+			                </div>
+			                <div class="mb-3 form-check">
+			                  <label for="InputDescripción" class="form-label">Descripción</label>
+			                  <textarea class="form-control" name="ndescripcion" id="InputDescripción"></textarea>
 			                </div>
 			              </div>
 			              <div class="modal-footer">
@@ -113,13 +111,15 @@ if(!isset($usuario)){
 					<thead>
 						<tr>
 							<th scope="col">N°</th>
-				            <th scope="col">NOMBRE</th>
-				            <th scope="col">APELLIDOS</th>
-				            <th scope="col">NIVEL</th>
-				            <th scope="col">CORREO</th>
+				            <th scope="col">USUARIO</th>
+				            <th scope="col">FECHA Y HORA DE INGRESO</th>
+				            <th scope="col">MOTIVO</th>
+				            <th scope="col">TIEMPO</th>
+				            <th scope="col">FECHA Y HORA DE RETORNO</th>
 				            <th scope="col">ESTADO</th>
+				            <th scope="col">DESCRIPCIÓN</th>
 				            <?php
-				             $sellac= "SELECT * FROM usuario INNER JOIN niveles ON usuario.idnivel = niveles.idnivel WHERE email='$usuario'";
+				             $sellac= "SELECT * FROM usuario  INNER JOIN niveles ON usuario.idnivel = niveles.idnivel WHERE email='$usuario'";
           					$queryac=mysqli_query($conexion,$sellac);
 					          while($acceso1 = mysqli_fetch_array($queryac))
 					          {
@@ -136,16 +136,17 @@ if(!isset($usuario)){
 					</thead>
 					<tbody>
 						<?php
-							$sqlbq="SELECT * FROM usuario INNER JOIN niveles ON usuario.idnivel = niveles.idnivel";
+							$sqlbq="SELECT * FROM diligencias INNER JOIN usuario ON diligencias.idusuario = usuario.idusuario";
 							$res=$conexion->query($sqlbq);
 							while($row=$res->fetch_assoc()){ 
 						?>
 						<tr>
-							<th scope="row"><?php echo $row['idusuario']; ?></th>
-				            <td><?php echo $row['nombre']; ?></td>
-				            <td><?php echo $row['apellidos']; ?></td>
-				            <td><?php echo $row['nivel']; ?></td>
-				            <td><?php echo $row['email']; ?></td>
+							<th scope="row"><?php echo $row['id_diligencia']; ?></th>
+				            <td><?php echo $row['nombre']." ". $row['apellidos']; ?></td>
+				            <td><?php echo $row['fecha_hora_ingreso']; ?></td>
+				            <td><?php echo $row['motivo']; ?></td>
+				            <td><?php echo $row['tiempo']; ?></td>
+				            <td><?php echo $row['fecha_hora_retorno']; ?></td>
 				            <td><?php $es=$row['estado'];
 				                if ($es==1){
 				                echo "Habilitado";
@@ -153,6 +154,7 @@ if(!isset($usuario)){
 				                echo "Deshabilitado";
 				                } ?>
 				            </td>
+				            <td><?php echo $row['descripcion']; ?></td>
 				            <?php
 				             $sellac= "SELECT * FROM usuario INNER JOIN niveles ON usuario.idnivel = niveles.idnivel WHERE email='$usuario'";
           					$queryac=mysqli_query($conexion,$sellac);

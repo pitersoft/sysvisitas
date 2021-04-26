@@ -13,24 +13,18 @@
   <body>
     <?php  
       include '../../../conf/conexion.php';
-      $nnombre = $_POST['nnombre'];
-      $napellidos = $_POST['napellidos'];
-      if(isset($_POST['nnivel']))
-      {
-        $nnivel=(int)$_POST['nnivel'];
-      }
-      $ncorreo = $_POST['ncorreo'];
-      $ncontrasena = $_POST['ncontrasena'];
-      if(isset($_POST['nlogin']))
-      {
-        $nlogin=(int)$_POST['nlogin'];
-      }
+      $nusuario = $_POST['nusuario'];
+      $nfhingreso = $_POST['nfhingreso'];
+      $nmotivo = $_POST['nmotivo'];
+      $ntiempo = $_POST['ntiempo'];
+      $nfhretorno = $_POST['nfhretorno'];
       if(isset($_POST['nestado']))
       {
         $nestado=(int)$_POST['nestado'];
       }
+      $ndescripcion = $_POST['ndescripcion'];
       if (isset($_POST['nuevo'])) {
-        $agregar="INSERT INTO usuario(idnivel, nombre, apellidos, email, password, login, estado, perfil) VALUES ('$nnivel','$nnombre','$napellidos','$ncorreo','$ncontrasena','$nlogin','$nestado', 'perfil.png')";
+        $agregar="INSERT INTO diligencias(idusuario, fecha_hora_ingreso, motivo, tiempo, fecha_hora_retorno, estado, descripcion) VALUES ('$nusuario','$nfhingreso','$nmotivo','$ntiempo','$nfhretorno','$nestado', '$ndescripcion')";
 
         $resultadoagregar=mysqli_query($conexion,$agregar);
         $respuestaagregar="Se ha agregado nuevo usuario.";

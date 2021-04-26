@@ -322,7 +322,7 @@ if(!isset($usuario)){
                 {
           ?>
           <?php
-          if ($acceso3['personas']==1 || $acceso3['permisos']) {
+          if ($acceso3['personas']==1 || $acceso3['permisos']==1 || $acceso3['diligencias']==1) {
           ?>
           <li class="nav-item">
             <a href="#" class="nav-link">
@@ -364,6 +364,18 @@ if(!isset($usuario)){
                 }
               ?>
               <?php
+              if ($acceso1['diligencias']==1) {
+              ?>
+              <li class="nav-item">
+                <a href="pages/tables/diligencias" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Diligencias</p>
+                </a>
+              </li>
+              <?php 
+                }
+              ?>
+              <?php
               }
               ?>
             </ul>
@@ -381,7 +393,7 @@ if(!isset($usuario)){
                 {
           ?>
           <?php
-          if ($acceso5['visitas'] || $acceso5['reporte_permisos']) {
+          if ($acceso5['visitas']==1 || $acceso5['reporte_permisos']==1) {
           ?>
           <li class="nav-item">
             <a href="#" class="nav-link">
