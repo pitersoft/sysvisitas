@@ -38,7 +38,7 @@ if(!isset($usuario)){
 				if ($acceso['login']==1) {
 				?>
 				<!-- Nuevo Usuaario -->
-		          <div class="modal-content">
+		          <div class="modal-content" style="width: 100%;">
 		            <div class="modal-header">
 		              <h5 class="modal-title" id="exampleModalLabel">Nueva Diligencia</h5>
 		            </div>
@@ -81,7 +81,7 @@ if(!isset($usuario)){
 		                  <label for="InputDescripción" class="form-label" style="margin-right: 20px;">Descripción </label>
 		                  <textarea class="form-control" name="ndescripcion" id="InputDescripción"></textarea>
 		                </div>
-		                <div class="mb-3 col-8 form-check" style="margin-left: 40%;margin-top: 15px;">
+		                <div class="mb-3 col-6 form-check" style="margin-left: 40%;margin-top: 15px;">
 		                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
 		                <input type="submit" name="nuevo" class="btn btn-success" value="Agregar">
 		            	</div>
@@ -124,37 +124,31 @@ if(!isset($usuario)){
 					</thead>
 					<tbody>
 						<?php
-							$sqlbq="SELECT * FROM diligencias INNER JOIN usuario ON diligencias.idusuario = usuario.idusuario";
-							$res=$conexion->query($sqlbq);
-							while($row=$res->fetch_assoc()){ 
+							$sqlbqdl="SELECT * FROM diligencias INNER JOIN usuario ON diligencias.idusuario = usuario.idusuario";
+							$resdl=$conexion->query($sqlbqdl);
+							while($row=$resdl->fetch_assoc()){ 
 						?>
-						<tr class="<?php if($row['estado'] == 0){echo 'bg-danger';}elseif($row['estado'] == 1){echo 'bg-warning';}elseif($row['estado'] == 2){echo 'bg-success';} ?>">
-							<th scope="row" style="color: #fff;"><?php echo $row['id_diligencia']; ?></th>
-				            <td style="color: #fff;"><?php echo $row['nombre']." ". $row['apellidos']; ?></td>
-				            <td style="color: #fff;"><?php echo $row['fecha_hora_ingreso']; ?></td>
-				            <td style="color: #fff;"><?php echo $row['motivo']; ?></td>
-				            <td style="color: #fff;"><?php echo $row['tiempo']; ?></td>
-				            <td style="color: #fff;"><?php echo $row['fecha_hora_retorno']; ?></td>
-				            <td style="color: #fff;"><?php echo $row['descripcion']; ?></td>
-				            <td style="color: #fff;"><form method="post" action="">
-				            	<select class="form-select" name="mestado" id="exampleInputEstado1">
-						        <option value="0" <?php echo $row['estado'] == 0 ? 'selected' : ''; ?>> Iniciado </option>
-						        <option value="1" <?php echo $row['estado'] == 1 ? 'selected' : ''; ?>> En Progreso </option>					
-						        <option value="2" <?php echo $row['estado'] == 2 ? 'selected' : ''; ?>> Finalizado </option>
-							    </select>
-							    <input type="submit" name="btnestado" class="btn btn-primary mt-2" value="Guardar"> 
-							    <?php
-							    if(isset($_POST['btnestado']))
-					            {
-							      $idmu=$row['id_diligencia'];
-					              $mestado=(int)$_POST['mestado'];
-					             $editare="UPDATE diligencias SET estado='$mestado' WHERE id_diligencia='$idmu'";
-					             $resultadonuevoe=mysqli_query($conexion,$editare);
-					            }
-							    ?>
-							</form></td>
+						<tr class="">
+							<th scope="row" style=""><?php echo $row['id_diligencia']; ?></th>
+				            <td style=""><?php echo $row['nombre']." ". $row['apellidos']; ?></td>
+				            <td style=""><?php echo $row['fecha_hora_ingreso']; ?></td>
+				            <td style=""><?php echo $row['motivo']; ?></td>
+				            <td style=""><?php echo $row['tiempo']; ?></td>
+				            <td style=""><?php echo $row['fecha_hora_retorno']; ?></td>
+				            <td style=""><?php echo $row['descripcion']; ?></td>
+				            <td style="text-align: center;">
+				            	<?php 
+				            	$es=$row['estado'];
+				                if ($es==0){
+				                echo '<div class="btn btn-danger">Iniciado</div>';
+				                }elseif ($es==1){
+				                echo '<div class="btn btn-warning">En Progreso</div>';
+				                }elseif ($es==2){
+				                echo '<div class="btn btn-success">Finalizado</div>';
+				                }
+				                ?>
+							</td>
 				            <?php
-				             $sellac= "SELECT * FROM usuario INNER JOIN niveles ON usuario.idnivel = niveles.idnivel WHERE email='$usuario'";
           					$queryac=mysqli_query($conexion,$sellac);
 					          while($acceso2 = mysqli_fetch_array($queryac))
 					          {
@@ -162,7 +156,7 @@ if(!isset($usuario)){
 							<?php
 							if ($acceso2['nivel']=="Administrador") {
 							?>
-							<td style="color: #fff;background-color: #fff;">
+							<td style="background-color: #fff;">
 				              <a href="modificarusuario.php?id=<?php echo $row['idusuario']; ?>" class="btn btn-warning">
 				                Editar
 				              </a>
