@@ -81,13 +81,6 @@
           <input type="datetime-local" class="form-control" name="mfhretorno" id="InputFechahoraRetorno" value="<?php echo (date ('Y-m-d\TH:i:s', strtotime($fila['fecha_hora_retorno']))); ?>">
         </div>
         <div class="mb-3 form-check">
-          <label for="exampleInputEstado2" class="form-label">Estado</label>
-          <select class="form-select" name="mestado" id="exampleInputEstado1">
-            <option value="0" <?php echo $fila['estado'] == 0 ? 'selected' : ''; ?>> Deshabilitado </option>
-            <option value="1" <?php echo $fila['estado'] == 1 ? 'selected' : ''; ?>> Habilitado </option>
-          </select>
-        </div>
-        <div class="mb-3 form-check">
           <label for="InputDescripción" class="form-label">Descripción</label>
           <textarea class="form-control" name="mdescripcion" id="InputDescripción"><?php echo $fila['descripcion'];?></textarea>
         </div>
@@ -103,13 +96,9 @@
             $mmotivo = $_POST['mmotivo'];
             $mtiempo = $_POST['mtiempo'];
             $mfhretorno = $_POST['mfhretorno'];
-            if(isset($_POST['mestado']))
-            {
-              $mestado=(int)$_POST['mestado'];
-            }
             $mdescripcion = $_POST['mdescripcion'];
             if (isset($_POST['editar'])) {
-              $editar="UPDATE diligencias SET idusuario='$musuario',fecha_hora_ingreso='$mfhingreso',motivo='$mmotivo',tiempo='$mtiempo',fecha_hora_retorno='mfhretorno',estado='$mestado',descripcion='$mdescripcion' WHERE id_diligencia='$idmu'";
+              $editar="UPDATE diligencias SET idusuario='$musuario',fecha_hora_ingreso='$mfhingreso',motivo='$mmotivo',tiempo='$mtiempo',fecha_hora_retorno='mfhretorno',descripcion='$mdescripcion' WHERE id_diligencia='$idmu'";
 
               $resultadonuevo=mysqli_query($conexion,$editar);
               $respuestanuevo="Se ha modificadoado usuario.";

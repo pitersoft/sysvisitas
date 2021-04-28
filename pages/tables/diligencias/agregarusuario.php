@@ -20,7 +20,7 @@
       $nfhretorno = $_POST['nfhretorno'];
       $ndescripcion = $_POST['ndescripcion'];
       if (isset($_POST['nuevo'])) {
-        $agregar="INSERT INTO diligencias(idusuario, fecha_hora_ingreso, motivo, tiempo, fecha_hora_retorno, estado, descripcion) VALUES ('$nusuario','$nfhingreso','$nmotivo','$ntiempo','$nfhretorno',1, '$ndescripcion')";
+        $agregar="INSERT INTO diligencias(idusuario, fecha_hora_ingreso, motivo, tiempo, fecha_hora_retorno, estado, descripcion) VALUES ('$nusuario','$nfhingreso','$nmotivo','$ntiempo','$nfhretorno',0, '$ndescripcion')";
 
         $resultadoagregar=mysqli_query($conexion,$agregar);
         $respuestaagregar="Se ha agregado nuevo usuario.";
