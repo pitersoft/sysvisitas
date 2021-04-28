@@ -36,76 +36,64 @@ if(!isset($usuario)){
 				<h4 class="text-center text-dark pt-2">Registro de Diligencias</h4>
 				<?php
 				if ($acceso['login']==1) {
-					echo '<button type="button" class="btn btn-success col-1" data-bs-toggle="modal" data-bs-target="#exampleModal">
-			       Nuevo
-			    </button>';
+				?>
+				<!-- Nuevo Usuaario -->
+		          <div class="modal-content">
+		            <div class="modal-header">
+		              <h5 class="modal-title" id="exampleModalLabel">Nueva Diligencia</h5>
+		            </div>
+		            <form action="agregarusuario.php" method="POST">
+		              <div class="modal-body row">
+		                <div class="mb-3 col-4 form-check">
+		                  <label for="InputUsuario" class="form-label">Usuario</label>
+		                  <input class="form-control" name="nusuario" id="InputUsuario" list="usuariosv">
+		                  <datalist id="usuariosv">
+		                  	<?php 
+		                        $query=mysqli_query($conexion,"SELECT * FROM usuario");
+		                        while($nivel = mysqli_fetch_array($query))
+		                        {
+		                    ?>
+		                    <option value="<?php echo $nivel['idusuario']?>"> <?php echo $nivel['nombre']." ".$nivel['apellidos']?></option>
+		                    <?php
+		                        }
+		                    ?>
+		                   	<option></option>
+		                  </datalist>
+		                </div>
+		                <div class="mb-3 col-4 form-check">
+		                  <label for="InputFechahoraIngreso" class="form-label">Fecha y hora de Ingreso</label>
+		                  <input type="datetime-local" class="form-control" name="nfhingreso" id="InputFechahoraIngreso">
+		                </div>
+
+		                <div class="mb-3 col-4 form-check">
+		                  <label for="InputMotivo" class="form-label">Motivo</label>
+		                  <input type="text" class="form-control" name="nmotivo" id="InputMotivo">
+		                </div>
+		                <div class="mb-3 col-4 form-check">
+		                  <label for="InputTiempo" class="form-label">Tiempo</label>
+		                  <input type="time" class="form-control" name="ntiempo" id="InputTiempo" aria-describedby="emailHelp">
+		                </div>
+		                <div class="mb-3 col-4 form-check">
+		                  <label for="InputFechahoraRetorno" class="form-label">Fecha y hora de Retorno</label>
+		                  <input type="datetime-local" class="form-control" name="nfhretorno" id="InputFechahoraRetorno">
+		                </div>
+		                <div class="mb-3 col-4 form-check" style="display: flex;flex-direction: column;">
+		                  <label for="InputDescripción" class="form-label" style="margin-right: 20px;">Descripción </label>
+		                  <textarea class="form-control" name="ndescripcion" id="InputDescripción"></textarea>
+		                </div>
+		                <div class="mb-3 col-8 form-check" style="margin-left: 40%;margin-top: 15px;">
+		                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+		                <input type="submit" name="nuevo" class="btn btn-success" value="Agregar">
+		            	</div>
+		              </div>
+		            </form>
+		          </div>
+			    <?php
 				}
 				?>
 			    <?php  
 			    	}
 				?>
-
-			      <!-- Nuevo Usuaario -->
-			      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-			        <div class="modal-dialog">
-			          <div class="modal-content">
-			            <div class="modal-header">
-			              <h5 class="modal-title" id="exampleModalLabel">Nueva Diligencia</h5>
-			              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-			            </div>
-			            <form action="agregarusuario.php" method="POST">
-			              <div class="modal-body">
-			                <div class="mb-3 form-check">
-			                  <label for="InputUsuario" class="form-label">Usuario</label>
-			                  <select class="form-select" name="nusuario" id="InputUsuario">
-			                    <?php 
-			                        $query=mysqli_query($conexion,"SELECT * FROM usuario");
-			                        while($nivel = mysqli_fetch_array($query))
-			                        {
-			                    ?>
-			                            <option value="<?php echo $nivel['idusuario']?>"> <?php echo $nivel['nombre']." ".$nivel['apellidos']?> </option>
-			                    <?php
-			                        }
-			                    ?> 
-			                  </select>
-			                </div>
-			                <div class="mb-3 form-check">
-			                  <label for="InputFechahoraIngreso" class="form-label">Fecha y hora de Ingreso</label>
-			                  <input type="datetime-local" class="form-control" name="nfhingreso" id="InputFechahoraIngreso">
-			                </div>
-
-			                <div class="mb-3 form-check">
-			                  <label for="InputMotivo" class="form-label">Motivo</label>
-			                  <input type="text" class="form-control" name="nmotivo" id="InputMotivo">
-			                </div>
-			                <div class="mb-3 form-check">
-			                  <label for="InputTiempo" class="form-label">Tiempo</label>
-			                  <input type="time" class="form-control" name="ntiempo" id="InputTiempo" aria-describedby="emailHelp">
-			                </div>
-			                <div class="mb-3 form-check">
-			                  <label for="InputFechahoraRetorno" class="form-label">Fecha y hora de Retorno</label>
-			                  <input type="datetime-local" class="form-control" name="nfhretorno" id="InputFechahoraRetorno">
-			                </div>
-			                <div class="mb-3 form-check">
-			                  <label for="exampleInputEstado1" class="form-label">Estado</label>
-			                  <select class="form-select" name="nestado" id="exampleInputEstado1">
-			                    <option value="0"> Deshabilitado </option>
-			                    <option value="1"> Habilitado </option>
-			                  </select>
-			                </div>
-			                <div class="mb-3 form-check">
-			                  <label for="InputDescripción" class="form-label">Descripción</label>
-			                  <textarea class="form-control" name="ndescripcion" id="InputDescripción"></textarea>
-			                </div>
-			              </div>
-			              <div class="modal-footer">
-			                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-			                <input type="submit" name="nuevo" class="btn btn-success" value="Agregar">
-			              </div>
-			            </form>
-			          </div>
-			        </div>
-			      </div>
 				<hr>
 				<table class="table table-bordered table-striped table-hover">
 					<thead>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-04-2021 a las 01:55:22
+-- Tiempo de generación: 28-04-2021 a las 01:58:52
 -- Versión del servidor: 10.4.18-MariaDB
 -- Versión de PHP: 8.0.3
 
@@ -75,7 +75,8 @@ CREATE TABLE `diligencias` (
 --
 
 INSERT INTO `diligencias` (`id_diligencia`, `idusuario`, `fecha_hora_ingreso`, `motivo`, `tiempo`, `fecha_hora_retorno`, `estado`, `descripcion`) VALUES
-(1, 1, '2021-04-26 20:59:00', 'Salud', '17:00:00', '0000-00-00 00:00:00', 1, 'Prueba');
+(1, 1, '2021-04-26 20:59:00', 'Salud', '17:00:00', '0000-00-00 00:00:00', 1, 'Prueba'),
+(2, 2, '2021-04-27 23:49:00', 'Salud', '03:00:00', '2021-04-27 21:49:00', 1, 'Nuevo');
 
 -- --------------------------------------------------------
 
@@ -288,7 +289,7 @@ ALTER TABLE `acceso`
 -- AUTO_INCREMENT de la tabla `diligencias`
 --
 ALTER TABLE `diligencias`
-  MODIFY `id_diligencia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_diligencia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `niveles`
