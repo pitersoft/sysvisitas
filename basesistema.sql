@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-04-2021 a las 23:57:49
+-- Tiempo de generación: 30-04-2021 a las 02:35:20
 -- Versión del servidor: 10.4.18-MariaDB
 -- Versión de PHP: 8.0.3
 
@@ -75,10 +75,10 @@ CREATE TABLE `diligencias` (
 --
 
 INSERT INTO `diligencias` (`id_diligencia`, `idusuario`, `fecha_hora_ingreso`, `motivo`, `tiempo`, `fecha_hora_retorno`, `estado`, `descripcion`) VALUES
-(1, 1, '2021-04-28 21:56:23', 'Salud', '17:00:00', '0000-00-00 00:00:00', 0, 'Prueba'),
-(2, 2, '2021-04-28 21:56:23', 'Salud', '03:00:00', '2021-04-27 21:49:00', 0, 'Nuevo'),
-(3, 3, '2021-04-28 21:56:23', 'Salud', '04:00:00', '2021-04-28 20:30:00', 0, 'numero1'),
-(4, 6, '2021-04-28 21:56:23', 'Salud', '02:00:00', '2021-04-28 19:48:00', 0, '1234');
+(1, 1, '2021-04-29 22:40:13', 'Salud', '17:00:00', '2021-04-28 17:40:01', 1, 'Prueba.'),
+(2, 2, '2021-04-29 00:19:00', 'Salud', '03:00:00', '2021-04-27 21:49:00', 2, 'Nuevo'),
+(3, 3, '2021-04-29 00:19:01', 'Salud', '04:00:00', '0000-00-00 00:00:00', 2, 'numero1'),
+(4, 6, '2021-04-29 00:19:01', 'Salud', '02:00:00', '2021-04-28 19:48:00', 2, '1234');
 
 -- --------------------------------------------------------
 
@@ -120,21 +120,22 @@ CREATE TABLE `permisos` (
   `visitas` int(11) NOT NULL,
   `permisos` int(11) NOT NULL,
   `reporte_permisos` int(11) NOT NULL,
-  `diligencias` int(11) NOT NULL
+  `diligencias` int(11) NOT NULL,
+  `reporte_diligencias` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `permisos`
 --
 
-INSERT INTO `permisos` (`idpermiso`, `idnivel`, `usuarios`, `personas`, `visitas`, `permisos`, `reporte_permisos`, `diligencias`) VALUES
-(1, 1, 0, 0, 0, 0, 0, 0),
-(2, 2, 0, 0, 0, 0, 0, 0),
-(3, 3, 0, 0, 0, 0, 0, 0),
-(4, 4, 0, 0, 1, 0, 0, 0),
-(5, 6, 1, 1, 1, 1, 1, 1),
-(6, 7, 0, 0, 0, 0, 0, 0),
-(7, 5, 0, 0, 0, 0, 0, 0);
+INSERT INTO `permisos` (`idpermiso`, `idnivel`, `usuarios`, `personas`, `visitas`, `permisos`, `reporte_permisos`, `diligencias`, `reporte_diligencias`) VALUES
+(1, 1, 0, 0, 0, 0, 0, 0, 0),
+(2, 2, 0, 0, 0, 0, 0, 0, 0),
+(3, 3, 0, 0, 0, 0, 0, 0, 0),
+(4, 4, 0, 0, 1, 0, 0, 0, 0),
+(5, 6, 1, 1, 1, 1, 1, 1, 1),
+(6, 7, 0, 0, 0, 0, 0, 0, 0),
+(7, 5, 0, 0, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 

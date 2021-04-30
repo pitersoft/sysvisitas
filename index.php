@@ -393,7 +393,7 @@ if(!isset($usuario)){
                 {
           ?>
           <?php
-          if ($acceso5['visitas']==1 || $acceso5['reporte_permisos']==1) {
+          if ($acceso5['visitas']==1 || $acceso5['reporte_permisos']==1 || $acceso5['reporte_diligencias']==1) {
           ?>
           <li class="nav-item">
             <a href="#" class="nav-link">
@@ -429,6 +429,17 @@ if(!isset($usuario)){
                 <a href="pages/reportes/reportepermisos" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Permisos</p>
+                </a>
+              </li>
+              <?php 
+                }
+              ?><?php
+              if ($acceso6['reporte_diligencias']==1) {
+              ?>
+              <li class="nav-item">
+                <a href="pages/reportes/reportediligencias" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Diligencias</p>
                 </a>
               </li>
               <?php 
