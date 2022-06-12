@@ -8,7 +8,7 @@ if(!isset($usuario)){
 }
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -119,19 +119,20 @@ if(!isset($usuario)){
 				            <th scope="col">CORREO</th>
 				            <th scope="col">ESTADO</th>
 				            <?php
-				             $sellac= "SELECT * FROM usuario INNER JOIN niveles ON usuario.idnivel = niveles.idnivel WHERE email='$usuario'";
+				            mysqli_set_charset($conexion,"utf8");
+				            $sellac= "SELECT * FROM usuario INNER JOIN niveles ON usuario.idnivel = niveles.idnivel WHERE email='$usuario'";
           					$queryac=mysqli_query($conexion,$sellac);
 					          while($acceso1 = mysqli_fetch_array($queryac))
 					          {
-							?>
-							<?php
-							if ($acceso1['nivel']=="Administrador") {
-								echo '<th scope="col">ACCIONES</th>';
-							}
-							?>
-						    <?php  
-						    	}
-							?>
+												?>
+												<?php
+												if ($acceso1['nivel']=="Administrador") {
+													echo '<th scope="col">ACCIONES</th>';
+												}
+												?>
+						    		<?php  
+						    				}
+										?>
 						</tr>
 					</thead>
 					<tbody>
