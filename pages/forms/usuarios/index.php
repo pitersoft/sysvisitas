@@ -1,18 +1,18 @@
-  
 <?php  
-
-session_start();
-$usuario = $_SESSION['username'];
-if(!isset($usuario)){
-  header("location: login.php");
-}
+	session_start();
+	$usuario = $_SESSION['username'];
+	if(!isset($usuario)){
+	  header("location: login.php");
+	}
 ?>
-<!DOCTYPE html>
-<html lang="es">
-<head>
-	<meta charset="utf-8">
+
+<!-- <!DOCTYPE html>
+<html lang="es"> 
+<head> -->
+<!-- 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title></title>
+	<title></title> -->
+
 	<link rel="stylesheet" href="">
 	<link rel="stylesheet" type="text/css" href="Bootstrap-4-4.1.1/css/bootstrap.min.css"/>
 	<link rel="stylesheet" type="text/css" href="DataTables-1.10.24/css/dataTables.bootstrap4.min.css"/>
@@ -21,7 +21,11 @@ if(!isset($usuario)){
 	<script type="text/javascript" src="Bootstrap-4-4.1.1/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="DataTables-1.10.24/js/jquery.dataTables.min.js"></script>
 	<script type="text/javascript" src="DataTables-1.10.24/js/dataTables.bootstrap4.min.js"></script>
-</head>
+
+
+
+<!-- </head> -->
+
 <body class="" style="width: 100%;">
 	<div class="bg-ligth" style="width: 100%;">
 		<?php
@@ -35,14 +39,13 @@ if(!isset($usuario)){
 			<div class=" bg-light rounded my-2 mx-2 ml-1" style="width: 98%;padding: 20px 0px 20px 30px;">
 				<h4 class="text-center text-dark pt-2">Registro de Usuarios</h4>
 				<?php
-				if ($acceso['nivel']=="Administrador") {
-					echo '<button type="button" class="btn btn-success col-1" data-bs-toggle="modal" data-bs-target="#exampleModal">
-			       Nuevo
-			    </button>';
-				}
-				?>
-			    <?php  
-			    	}
+							if ($acceso['nivel']=="Administrador") {
+								echo '<button type="button" class="btn btn-success col-1" data-bs-toggle="modal" data-bs-target="#exampleModal">
+						       Nuevo
+						    </button>';
+							}
+
+					}
 				?>
 
 			      <!-- Nuevo Usuaario -->
@@ -51,11 +54,11 @@ if(!isset($usuario)){
 			          <div class="modal-content">
 			            <div class="modal-header">
 			              <h5 class="modal-title" id="exampleModalLabel">Nuevo Usuario</h5>
-			              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="border: none;"> X </button>
 			            </div>
 			            <form action="agregarusuario.php" method="POST">
 			              <div class="modal-body">
-			                <div class="mb-3 form-check">
+			                <div class="mb-4 form-check">
 			                  <label for="exampleInputNombre1" class="form-label">Nombre</label>
 			                  <input type="text" class="form-control" name="nnombre" id="exampleInputNombre1">
 			                </div>
@@ -65,7 +68,7 @@ if(!isset($usuario)){
 			                </div>
 			                <div class="mb-3 form-check">
 			                  <label for="exampleInputNivel1" class="form-label">Nivel</label>
-			                  <select class="form-select" name="nnivel" id="exampleInputNivel1">
+			                  <select class="form-control" name="nnivel" id="exampleInputNivel1">
 			                    <?php 
 			                        $query=mysqli_query($conexion,"SELECT * FROM niveles");
 			                        while($nivel = mysqli_fetch_array($query))
@@ -87,14 +90,14 @@ if(!isset($usuario)){
 			                </div>
 			                <div class="mb-3 form-check">
 			                  <label for="exampleInputLogin1" class="form-label">Tipo Login</label>
-			                  <select class="form-select" name="nlogin" id="exampleInputLogin1">
+			                  <select class="form-control" name="nlogin" id="exampleInputLogin1">
 			                    <option value="0"> Usuario </option>
 			                    <option value="1"> Administrador </option>
 			                  </select>
 			                </div>
 			                <div class="mb-3 form-check">
 			                  <label for="exampleInputEstado1" class="form-label">Estado</label>
-			                  <select class="form-select" name="nestado" id="exampleInputEstado1">
+			                  <select class="form-control" name="nestado" id="exampleInputEstado1">
 			                    <option value="0"> Deshabilitado </option>
 			                    <option value="1"> Habilitado </option>
 			                  </select>

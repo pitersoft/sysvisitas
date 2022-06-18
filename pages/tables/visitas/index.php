@@ -36,13 +36,12 @@ if(!isset($usuario)){
 			    <div style="width: 100%;">
 				<div style="width: 100%;display: flex;flex-direction: row;justify-content: space-around;"> 	
 					<?php
-				if ($acceso['idnivel']==4) {
-					echo '<button type="button" class="btn btn-success col-1" data-bs-toggle="modal" data-bs-target="#exampleModal">
-			       Nuevo
-			    </button>';
-				}
-				?>
-			    <?php  
+								if ($acceso['idnivel']==4) {
+									echo '<button type="button" class="btn btn-success col-1" data-bs-toggle="modal" data-bs-target="#exampleModal">
+							       Nuevo
+							    </button>';
+								}
+
 			    	}
 				?>
 
@@ -52,7 +51,7 @@ if(!isset($usuario)){
 			          <div class="modal-content">
 			            <div class="modal-header">
 			              <h5 class="modal-title" id="exampleModalLabel">Registrar Visitas</h5>
-			              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="border: none;">X</button>
 			            </div>
 			            <form action="agregarvisita.php" method="POST">
 			              <div class="modal-body">
@@ -65,7 +64,7 @@ if(!isset($usuario)){
 			                        while($namevis = mysqli_fetch_array($vist))
 			                        {
 			                    ?>
-			                    <option value="<?php echo $namevis['idpersona']; ?>"><?php echo $namevis['nombres'].$namevis['apellido_pat'].$namevis['apellido_mat']; ?></option>
+			                    <option value="<?php echo $namevis['idpersona']; ?>"><?php echo $namevis['dni']."-".$namevis['nombres'].$namevis['apellido_pat'].$namevis['apellido_mat']; ?></option>
 			                    <?php
 			                        }
 			                    ?>

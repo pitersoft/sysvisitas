@@ -1,31 +1,21 @@
 <?php  
 
-session_start();
-$usuario = $_SESSION['username'];
-if(!isset($usuario)){
-  header("location: login.php");
-}
+	session_start();
+	include '../../../conf/conexion.php';
+	$usuario = $_SESSION['username'];
+	if(!isset($usuario)){
+	  header("location: login.php");
+	}
+
+	include '../../../libraries.php';
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title></title>
-	<link rel="stylesheet" href="">
-	<link rel="stylesheet" type="text/css" href="Bootstrap-4-4.1.1/css/bootstrap.min.css"/>
-	<link rel="stylesheet" type="text/css" href="DataTables-1.10.24/css/dataTables.bootstrap4.min.css"/>
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
-	 
-	<script type="text/javascript" src="jQuery-3.3.1/jquery-3.3.1.min.js"></script>
-	<script type="text/javascript" src="Bootstrap-4-4.1.1/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="DataTables-1.10.24/js/jquery.dataTables.min.js"></script>
-	<script type="text/javascript" src="DataTables-1.10.24/js/dataTables.bootstrap4.min.js"></script>
-</head>
-<body class="" style="width: 100%;">
+
+
+
+
+
 	<div class="bg-ligth" style="width: 100%;">
 		<?php
-		    include '../../../conf/conexion.php';
           $sellac= "SELECT * FROM usuario WHERE email='$usuario'";
           $queryac=mysqli_query($conexion,$sellac);
           while($acceso = mysqli_fetch_array($queryac))
@@ -54,7 +44,7 @@ if(!isset($usuario)){
 			          <div class="modal-content">
 			            <div class="modal-header">
 			              <h5 class="modal-title" id="exampleModalLabel">Nuevo Nivel</h5>
-			              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="border: none;">X</button>
 			            </div>
 			            <form action="agregar.php" method="POST">
 			              <div class="modal-body">
@@ -68,15 +58,15 @@ if(!isset($usuario)){
 			                </div>
 			                <div class="mb-3 form-check">
 			                  <label for="exampleInputEstado1" class="form-label">Estado</label>
-			                  <select class="form-select" name="nestado" id="exampleInputEstado1">
+			                  <select class="form-control" name="nestado" id="exampleInputEstado1">
 			                    <option value="0"> Deshabilitado </option>
 			                    <option value="1"> Habilitado </option>
 			                  </select>
 			                </div>
 			              </div>
 			              <div class="modal-footer">
-			                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
 			                <input type="submit" name="agregarnivel" class="btn btn-success" value="Agregar">
+			                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
 			              </div>
 			            </form>
 			          </div>
@@ -91,25 +81,24 @@ if(!isset($usuario)){
 				            <th scope="col">NIVEL</th>
 				            <th scope="col">DESCRIPCIÓN</th>
 				            <th scope="col">ESTADO</th>	
-				            <?php
+				        
+				        <?php
 				             $sellac= "SELECT * FROM usuario WHERE email='$usuario'";
           					$queryac=mysqli_query($conexion,$sellac);
 					          while($acceso1 = mysqli_fetch_array($queryac))
 					          {
-							?>
-							<?php
-							if ($acceso1['login']==1) {
-								echo '<th scope="col">ACCIONES</th>';
-							}
-							?>
-						    <?php  
-						    	}
-							?>
+							
+												if ($acceso1['login']==1) {
+													echo '<th scope="col">ACCIONES</th>';
+												}
+
+						    		}
+								?>
+
 						</tr>
 					</thead>
 					<tbody>
 						<?php
-							
 							$sqlbq="SELECT * FROM niveles";
 							$res=$conexion->query($sqlbq);
 							while($row=$res->fetch_assoc()){ 
@@ -125,14 +114,13 @@ if(!isset($usuario)){
 				                echo "Deshabilitado";
 				                } ?>
 				            </td>
-				            <?php
+				      <?php
 				             $sellac= "SELECT * FROM usuario WHERE email='$usuario'";
           					$queryac=mysqli_query($conexion,$sellac);
 					          while($acceso2 = mysqli_fetch_array($queryac))
 					          {
-							?>
-							<?php
-							if ($acceso2['login']==1) {
+
+											if ($acceso2['login']==1) {
 							?>
 							<td>
 							  <a href="nuevopermiso.php?id=<?php echo $row['idnivel']; ?>" class="btn btn-secondary">
@@ -145,10 +133,9 @@ if(!isset($usuario)){
 				                Eliminar
 				              </a>
 				            </td>
-				            <?php
-							}
-							?>
-						    <?php  
+				      <?php
+											}
+
 						    	}
 							?>
 						</tr>
@@ -347,5 +334,3 @@ if(!isset($usuario)){
 		}  
 	</script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
-</body>
-</html>
